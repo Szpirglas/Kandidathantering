@@ -12,22 +12,30 @@
  * @author mattias
  */
 class apiKeyConnect {
-    //put your code here
-    
- 
 
+   
+     function getResponse($url) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        
+        return $result;
+    }
   
    
     function getBlogPosts()
     {
         
-        return 'https://api.hubapi.com/content/api/v2/blog-posts?hapikey=79d91373-8e94-4879-893c-e7d080224a55';
+        return $this->getResponse('https://api.hubapi.com/content/api/v2/blog-posts?hapikey=79d91373-8e94-4879-893c-e7d080224a55');
         
     }
     
     function getContacts()
     {
-        return 'https://api.hubapi.com/contacts/v1/lists/all/contacts/all?hapikey=79d91373-8e94-4879-893c-e7d080224a55&count=4';
+        return $this->getResponse('https://api.hubapi.com/contacts/v1/lists/all/contacts/all?hapikey=79d91373-8e94-4879-893c-e7d080224a55&count=4');
         
     }
 }
