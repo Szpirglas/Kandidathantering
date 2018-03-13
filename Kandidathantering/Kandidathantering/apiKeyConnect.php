@@ -29,13 +29,13 @@ class apiKeyConnect {
     function getBlogPosts()
     {
         
-        return $this->getResponse('https://api.hubapi.com/content/api/v2/blog-posts?hapikey=79d91373-8e94-4879-893c-e7d080224a55');
+        return json_decode($this->getResponse('https://api.hubapi.com/content/api/v2/blog-posts?hapikey=79d91373-8e94-4879-893c-e7d080224a55'));
         
     }
     
     function getContacts()
     {
-        return $this->getResponse('https://api.hubapi.com/contacts/v1/lists/all/contacts/all?hapikey=79d91373-8e94-4879-893c-e7d080224a55&count=4');
+        return json_decode($this->getResponse('https://api.hubapi.com/contacts/v1/lists/all/contacts/all?hapikey=79d91373-8e94-4879-893c-e7d080224a55&count=4'));
         
     }
 }

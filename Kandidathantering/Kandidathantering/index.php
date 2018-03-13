@@ -16,7 +16,7 @@ and open the template in the editor.
         
         $key = new apiKeyConnect();
     
-$objBlog = json_decode($key->getBlogPosts());
+$objBlog = $key->getBlogPosts();
 
 $blogCount = $objBlog->total_count;
 
@@ -31,12 +31,19 @@ $testBlog[] = $objBlog->objects[$i]->post_body;
 
 }
 
-foreach ($testBlog as $thingy)
+echo " <table> ";
+
+foreach ($testBlog as $blogPost)
 {
-    echo $thingy;
-    echo " <br> ";
-    
+   echo " <tr> ";
+   echo " <td> ";
+    echo $blogPost;
+    echo " <hr> ";
+    echo " </td> ";
+    echo " </tr> ";
 }
+
+echo " </table> ";
 
 ?>
         
