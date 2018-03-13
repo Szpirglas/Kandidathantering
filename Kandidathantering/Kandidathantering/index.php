@@ -16,28 +16,16 @@ and open the template in the editor.
         
         $key = new apiKeyConnect();
     
-$objBlog = $key->getBlogPosts();
+$blogPosts = $key->getBlogPosts();
 
-$blogCount = $objBlog->total_count;
-
-
-
-$testBlog = array();
-
-for ($i = 0; $i < $blogCount; $i++)
-{
-    
-$testBlog[] = $objBlog->objects[$i]->post_body;
-
-}
 
 echo " <table> ";
 
-foreach ($testBlog as $blogPost)
+foreach ($blogPosts as $blogPost)
 {
    echo " <tr> ";
    echo " <td> ";
-    echo $blogPost;
+    echo $blogPost["author"] . " <br> <br> " . $blogPost["post"];
     echo " <hr> ";
     echo " </td> ";
     echo " </tr> ";
@@ -46,7 +34,6 @@ foreach ($testBlog as $blogPost)
 echo " </table> ";
 
 ?>
-        
-         
+   
     </body>
 </html>
