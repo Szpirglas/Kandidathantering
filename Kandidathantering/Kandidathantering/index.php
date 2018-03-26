@@ -10,30 +10,29 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <?php
         
-        include_once('apiKeyConnect.php');
-        
-        $key = new apiKeyConnect();
-    
-$blogPosts = $key->getBlogPosts();
-
-
-echo " <table> ";
-
-foreach ($blogPosts as $blogPost)
-{
-   echo " <tr> ";
-   echo " <td> ";
-    echo $blogPost["author"] . " <br> <br> " . $blogPost["post"];
-    echo " <hr> ";
-    echo " </td> ";
-    echo " </tr> ";
-}
-
-echo " </table> ";
-
-?>
+         <div id="loginForm"><form action="login.php" method="post">
+         
+                 E-mail: <br>
+                 <input type="text" name="email"><br>
+                 Password: <br>
+                 <input type="password" name="password"><br>
+            <input type="submit">
+                
+            
+            <?php
+            require_once("apiKeyConnect.php");
+            
+            $connect = new apiKeyConnect();
+            
+            $profile = $connect->getProfile('mattias@sandinfoto.se');
+            
+            echo '<br>';
+            echo $profile[0]['firstname'] . ' ' . $profile[0]['lastname'];
+            
+            ?>
+            
+            </form></div>
    
     </body>
 </html>
