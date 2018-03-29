@@ -1,15 +1,11 @@
 <?php
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- * Description of apiKeyConnect
- *
- * @author mattias
- */
+require __DIR__ . '/vendor/autoload.php';
+
+$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv->load();
+
+
 class apiKeyConnect {
 
     function sendToHubSpot($url, $json) {
@@ -43,7 +39,7 @@ class apiKeyConnect {
     function getBlogPosts() {
 
 
-        $decoded = json_decode($this->getResponse('https://api.hubapi.com/content/api/v2/blog-posts?hapikey=79d91373-8e94-4879-893c-e7d080224a55&content_group_id=5623197993'));
+        $decoded = json_decode($this->getResponse('https://api.hubapi.com/content/api/v2/blog-posts?hapikey='.getenv('HS_APIKEY')));
 
         $blogCount = $decoded->total_count;
 
@@ -65,7 +61,7 @@ class apiKeyConnect {
     }
 
     function getProfile($email) {
-        $decoded = json_decode($this->getResponse('https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey=79d91373-8e94-4879-893c-e7d080224a55'));
+        $decoded = json_decode($this->getResponse('https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey='.getenv('HS_APIKEY')));
 
         $profile[] = array(
             "firstname" => $decoded->properties->firstname->value,
@@ -96,7 +92,7 @@ class apiKeyConnect {
 
         $profileEncoded = json_encode($profile);
         
-        $url = "https://api.hubapi.com/contacts/v1/contact/?hapikey=79d91373-8e94-4879-893c-e7d080224a55";
+        $url = 'https://api.hubapi.com/contacts/v1/contact/?hapikey='.getenv('HS_APIKEY');
         
         $this->sendToHubSpot($url, $profileEncoded);
     }

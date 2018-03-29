@@ -6,11 +6,13 @@ and open the template in the editor.
 -->
 
 <?php 
+
 if (isset($_COOKIE["loggedIn"]))
 {
     header("Location: success.php");
     
 }
+
 
 ?>
 <html>
