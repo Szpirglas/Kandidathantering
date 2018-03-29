@@ -4,38 +4,30 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-
-<?php 
-if (isset($_COOKIE["loggedIn"]))
-{
-    header("Location: success.php");
-    
-}
-
-?>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>Registrera dig!</title>
     </head>
     <body>
-        <h1>LOGGA IN</h1>
-        <br>
-        <br>
-         <div id="loginForm"><form action="login.php" method="post">
-         
+        <div id="regForm"><form action="register.php" method="post">
+                Förnamn:<br>
+                <input type="text" name="firstname"><br>
+                Efternamn:<br>
+                <input type="text" name="lastname"><br>
                  E-mail: <br>
                  <input type="text" name="email"><br>
-                 Password: <br>
+                 <br>
+                 Lösenord: <br>
                  <input type="password" name="password"><br>
+                 Bekräfta lösenord: <br>
+                 <input type="password" name="confirmpwd"><br>
             <input type="submit">
                 
-            <br>
-            <br>
-            <a href="registerform.php">Registrera dig här!</a>
+            
           
             
             </form></div>
-   
+      
     </body>
 </html>

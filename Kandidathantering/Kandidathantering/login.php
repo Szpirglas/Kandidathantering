@@ -17,26 +17,23 @@ if ($email != null AND $password != null) {
             echo "Connection failed: " . $con->connect_error;
         }
 
-        $sql = "SELECT EMAIL FROM USER WHERE EMAIL LIKE '" . $email .  "' AND PASSWORD LIKE '" . $password . "'";
-        //$sql = "select email from user where email like 'mattias@sandinfoto.se' and password like 'test'";
+        $sql = "SELECT EMAIL FROM USER WHERE EMAIL LIKE '" . $email . "' AND PASSWORD LIKE '" . $password . "'";
+
 
         $result = $con->query($sql);
 
-       
-        
-        
-        
-       
         if ($result->num_rows == 1) {
+
+
 
             $success = true;
         } else {
-            
-            
+
+
             $success = false;
         }
 
-     
+
 
         $con->close();
     }
@@ -44,6 +41,9 @@ if ($email != null AND $password != null) {
 
 
 if ($success == true) {
+
+    setcookie("loggedIn", $email);
+
     header('Location: success.php');
 } else {
     header('Location: index.php');
