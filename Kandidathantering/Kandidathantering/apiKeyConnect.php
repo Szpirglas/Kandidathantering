@@ -1,5 +1,7 @@
 <?php
 
+// Hämta .env-filen
+
 require __DIR__ . '/vendor/autoload.php';
 
 $dotenv = new Dotenv\Dotenv(__DIR__);
@@ -8,6 +10,13 @@ $dotenv->load();
 
 class apiKeyConnect {
 
+    /**
+     * Denna funktion används för att via cURL HTTP-POSTa data till HubSpot-databasen.
+     * 
+     * @param type $url = URL'en till det specifika API'et
+     * @param type $json = en JSON som innehåller det som ska skickas
+     */
+    
     function sendToHubSpot($url, $json) {
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
@@ -18,13 +27,16 @@ class apiKeyConnect {
             'Content-Length: ' . strlen($json))
         );
 
-        $result = curl_exec($ch);
-        
-        $file = fopen("post.txt", "w");
-        fwrite($file, $result);
-        fclose($file);
-    }
+        curl_exec($ch);
 
+    }
+    /**
+     * Funktion som använder cURL för att hämta data från ett specifikt API.
+     * 
+     * @param type $url = URL till API'et
+     * @return type $result = ett svar som är i JSON.
+     */
+        
     function getResponse($url) {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -59,6 +71,14 @@ class apiKeyConnect {
 
         return $blogPosts;
     }
+    
+    /**
+     * Denna funktion hämtar profilinformationen från HubSpot via den inloggades epostadress
+     * och returnerar sedan en array med informationen. 
+     * 
+     * @param type $email
+     * @return type
+     */
 
     function getProfile($email) {
         $decoded = json_decode($this->getResponse('https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey='.getenv('HS_APIKEY')));
@@ -69,7 +89,19 @@ class apiKeyConnect {
 
         return $profile;
     }
-
+    
+    /**
+     * Denna funktion används för att skapa en profil som ska lagras i HubSpot
+     * och används i samband med att en användare registrerar sig.
+     * Profilinformationen lagras i en flerdimensionell array som konverteras
+     * till JSON-format och sedan skickas in till HubSpot-API'et via anropad
+     * funktion.
+     * 
+     * @param type $firstname
+     * @param type $lastname
+     * @param type $email
+     */
+    
     function createProfile($firstname, $lastname, $email) {
 
         $profile = array(

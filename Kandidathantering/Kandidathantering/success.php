@@ -23,7 +23,7 @@ if (!isset($_COOKIE["loggedIn"])) {
     <body>
 <?php
 
-echo "<h1>Välkommen, " . $_SESSION['user']['firstname'] . "!</h1>";
+echo "<h1>Välkommen, " . $_SESSION['user']['firstname']. " " . $_SESSION['user']['lastname'] . "!</h1>";
 ?>
         <br>  <a href="logout.php">Log out!</a> <br>
 

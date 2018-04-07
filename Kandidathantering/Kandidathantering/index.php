@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 
 <?php 
+
+/* Om användaren har en cookie lagrad på sin dator så omdirigeras hen automatiskt
+ * till sidan för inloggade */
+   
 
 if (isset($_COOKIE["loggedIn"]))
 {
