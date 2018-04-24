@@ -5,9 +5,12 @@
         <group>
             <file>file:/Users/mattias/Documents/GitHub/Kandidathantering/Kandidathantering/Kandidathantering/success.php</file>
             <file>file:/Users/mattias/Documents/GitHub/Kandidathantering/Kandidathantering/Kandidathantering/logout.php</file>
+            <file>file:/Users/mattias/Documents/GitHub/Kandidathantering/Kandidathantering/Kandidathantering/dbConnection.php</file>
             <file>file:/Users/mattias/Documents/GitHub/Kandidathantering/Kandidathantering/Kandidathantering/login.php</file>
             <file>file:/Users/mattias/Documents/GitHub/Kandidathantering/Kandidathantering/Kandidathantering/index.php</file>
             <file>file:/Users/mattias/Documents/GitHub/Kandidathantering/Kandidathantering/Kandidathantering/registerform.php</file>
+            <file>file:/Users/mattias/Documents/GitHub/Kandidathantering/Kandidathantering/Kandidathantering/ListBlogPosts.php</file>
+            <file>file:/Users/mattias/Documents/GitHub/Kandidathantering/Kandidathantering/Kandidathantering/apiKeyConnect.php</file>
             <file>file:/Users/mattias/Documents/GitHub/Kandidathantering/Kandidathantering/Kandidathantering/register.php</file>
         </group>
     </open-files>

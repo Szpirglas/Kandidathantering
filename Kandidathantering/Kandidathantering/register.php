@@ -1,15 +1,19 @@
 <?php
 
+//Variablerna från formuläret i registerform.php hämtas
+
 $regFirstName = filter_input(INPUT_POST, 'firstname');
 $regLastName = filter_input(INPUT_POST, 'lastname');
 $regEmail = filter_input(INPUT_POST, 'email');
 $regPassword = filter_input(INPUT_POST, 'password');
 $regConfirmPwd = filter_input(INPUT_POST, 'confirmpwd');
 
+//Variablerna valideras
+
 if ($regEmail != null AND $regPassword != null AND $regFirstName != null AND $regLastName != null AND $regConfirmPwd != null) {
     if (filter_var($regEmail, FILTER_VALIDATE_EMAIL) AND ( $regPassword == $regConfirmPwd)) {
 
-
+        //Uppkoppling och insert i databasen
 
         require_once("dbConnection.php");
         $db = new dbConnection();
@@ -42,6 +46,9 @@ if ($regEmail != null AND $regPassword != null AND $regFirstName != null AND $re
             header('Location: registerform.php');
         }
     } else {
+        
+        //Manuell felhantering, kommer inte finnas kvar i framtiden :)
+        
         echo 'ERROR INRE!';
     }
 } else {
