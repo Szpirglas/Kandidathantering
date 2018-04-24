@@ -10,20 +10,31 @@ $regConfirmPwd = filter_input(INPUT_POST, 'confirmpwd');
 
 //Variablerna valideras
 
-if ($regEmail != null AND $regPassword != null AND $regFirstName != null AND $regLastName != null AND $regConfirmPwd != null) {
-    if (filter_var($regEmail, FILTER_VALIDATE_EMAIL) AND ( $regPassword == $regConfirmPwd)) {
+if (filter_var($regEmail, FILTER_VALIDATE_EMAIL) AND
+        $regPassword != null AND
+        $regFirstName != null AND
+        $regLastName != null AND
+        $regConfirmPwd != null AND 
+        $regPassword == $regConfirmPwd) {
 
-        //Uppkoppling och insert i databasen
 
-        require_once("dbConnection.php");
-        $db = new dbConnection();
-        $con = $db->connect();
+    //Uppkoppling och insert i databasen
 
-        if ($con->connect_error) {
-            echo "Connection failed: " . $con->connect_error;
-        }
+    require_once("dbConnection.php");
+    $db = new dbConnection();
+    $con = $db->connect();
 
-        $sql = "INSERT INTO USER (EMAIL, PASSWORD) values ('$regEmail', '$regPassword')";
+    if ($con->connect_error) {
+        echo "Connection failed: " . $con->connect_error;
+    }
+
+    $checkReg = "SELECT * FROM user where email = '$regEmail'";
+    $sql = "INSERT INTO USER (EMAIL, PASSWORD) values ('$regEmail', '$regPassword')";
+
+    $checkResponse = $con->query($checkReg);
+
+    if ($checkResponse->num_rows == 0) {
+
 
 
         if ($con->query($sql) === true) {
@@ -46,12 +57,16 @@ if ($regEmail != null AND $regPassword != null AND $regFirstName != null AND $re
             header('Location: registerform.php');
         }
     } else {
-        
-        //Manuell felhantering, kommer inte finnas kvar i framtiden :)
-        
-        echo 'ERROR INRE!';
+
+
+        $con->close();
+
+        header('Location: index.php');
     }
 } else {
-    echo 'ERROR YTTRE!';
+
+    //Manuell felhantering, kommer inte finnas kvar i framtiden :)
+
+    echo 'ERROR INRE!';
 }
-?>
+

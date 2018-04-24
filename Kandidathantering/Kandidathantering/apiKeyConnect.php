@@ -86,6 +86,7 @@ class apiKeyConnect {
         $profile[] = array(
             "firstname" => $decoded->properties->firstname->value,
             "lastname" => $decoded->properties->lastname->value);
+                
 
         return $profile;
     }
