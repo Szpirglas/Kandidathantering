@@ -7,7 +7,6 @@ require __DIR__ . '/vendor/autoload.php';
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
 
-
 class apiKeyConnect {
 
     /**
@@ -16,27 +15,25 @@ class apiKeyConnect {
      * @param type $url = URL'en till det specifika API'et
      * @param type $json = en JSON som innehåller det som ska skickas
      */
-    
     function sendToHubSpot($url, $json) {
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/json',
             'Content-Length: ' . strlen($json))
         );
 
         curl_exec($ch);
-
     }
+
     /**
      * Funktion som använder cURL för att hämta data från ett specifikt API.
      * 
      * @param type $url = URL till API'et
      * @return type $result = ett svar som är i JSON.
      */
-        
     function getResponse($url) {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -51,7 +48,7 @@ class apiKeyConnect {
     function getBlogPosts() {
 
 
-        $decoded = json_decode($this->getResponse('https://api.hubapi.com/content/api/v2/blog-posts?hapikey='.getenv('HS_APIKEY')));
+        $decoded = json_decode($this->getResponse('https://api.hubapi.com/content/api/v2/blog-posts?hapikey=' . getenv('HS_APIKEY')));
 
         $blogCount = $decoded->total_count;
 
@@ -71,7 +68,7 @@ class apiKeyConnect {
 
         return $blogPosts;
     }
-    
+
     /**
      * Denna funktion hämtar profilinformationen från HubSpot via den inloggades epostadress
      * och returnerar sedan en array med informationen. 
@@ -79,18 +76,17 @@ class apiKeyConnect {
      * @param type $email
      * @return type
      */
-
     function getProfile($email) {
-        $decoded = json_decode($this->getResponse('https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey='.getenv('HS_APIKEY')));
+        $decoded = json_decode($this->getResponse('https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey=' . getenv('HS_APIKEY')));
 
         $profile[] = array(
             "firstname" => $decoded->properties->firstname->value,
             "lastname" => $decoded->properties->lastname->value);
-                
+
 
         return $profile;
     }
-    
+
     /**
      * Denna funktion används för att skapa en profil som ska lagras i HubSpot
      * och används i samband med att en användare registrerar sig.
@@ -102,7 +98,6 @@ class apiKeyConnect {
      * @param type $lastname
      * @param type $email
      */
-    
     function createProfile($firstname, $lastname, $email) {
 
         $profile = array(
@@ -119,15 +114,44 @@ class apiKeyConnect {
                     'property' => 'lastname',
                     'value' => $lastname
                 ),
-               
             )
         );
 
         $profileEncoded = json_encode($profile);
-        
-        $url = 'https://api.hubapi.com/contacts/v1/contact/?hapikey='.getenv('HS_APIKEY');
-        
+
+        $url = 'https://api.hubapi.com/contacts/v1/contact/?hapikey=' . getenv('HS_APIKEY');
+
         $this->sendToHubSpot($url, $profileEncoded);
+    }
+
+    function updateProfile($email, $firstname, $lastname, $interest) {
+        $profile = array(
+            'properties' => array(
+                array(
+                    'property' => 'email',
+                    'value' => $email
+                ),
+                array(
+                    'property' => 'firstname',
+                    'value' => $firstname
+                ),
+                array(
+                    'property' => 'lastname',
+                    'value' => $lastname),
+                array(
+                    'property' => 'intresse',
+                    'value' => $interest
+        )));
+
+        $profileEncoded = json_encode($profile);
+
+        
+
+        $url = 'https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey=' . getenv('HS_APIKEY');
+
+        $this->sendToHubSpot($url, $profileEncoded);
+
+        
     }
 
 }
