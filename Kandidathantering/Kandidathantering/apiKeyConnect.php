@@ -76,12 +76,12 @@ class apiKeyConnect {
      * Denna funktion hämtar profilinformationen från HubSpot via den inloggades epostadress
      * och returnerar sedan en array med informationen. 
      * 
-     * @param type $email
+     * @param type $vid
      * @return type
      */
 
-    function getProfile($email) {
-        $decoded = json_decode($this->getResponse('https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey='.getenv('HS_APIKEY')));
+    function getProfile($vid) {
+        $decoded = json_decode($this->getResponse('https://api.hubapi.com/contacts/v1/contact/vid/' . $vid . '/profile?hapikey='.getenv('HS_APIKEY')));
 
         $profile[] = array(
             "firstname" => $decoded->properties->firstname->value,
@@ -128,6 +128,27 @@ class apiKeyConnect {
         $url = 'https://api.hubapi.com/contacts/v1/contact/?hapikey='.getenv('HS_APIKEY');
         
         $this->sendToHubSpot($url, $profileEncoded);
+    }
+
+    function subscribeNewsletter($email, $frequency)
+    {
+        $decoded = json_decode($this->getResponse('https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey='.getenv('HS_APIKEY')));
+        
+        $vid = array(
+            "vid" => $decoded->vid;
+        );
+
+        $subcription = array(
+            array(
+                'property' => 'blog_kandidat_5623197993_subscription',
+                'value' => $frequency
+            )
+        );
+
+        $subscriptionEncoded = json_encode($subcription);
+        $url = 'https://api.hubapi.com/contacts/v1/contact/vid/' . $vid . '/profile?hapikey='.getenv('HS_APIKEY')));
+
+        this->sendToHubSpot($url, $subscriptionEncoded);
     }
 
 }

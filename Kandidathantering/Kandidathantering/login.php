@@ -47,8 +47,14 @@ och cookien lagrades inte rätt. Att flytta ner koden hit löste problemet, varf
 men funkar det så funkar det! :) */
 
 if ($success == true) {
-
-    setcookie("loggedIn", $email);
+    
+    $decoded = json_decode($this->getResponse('https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey='.getenv('HS_APIKEY')));
+        
+        $vid = array(
+            "vid" => $decoded->vid;
+        );
+        
+    setcookie("loggedIn", $vid);
 
     header('Location: success.php');
 } else {
