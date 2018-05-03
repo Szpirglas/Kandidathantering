@@ -48,10 +48,15 @@ class apiKeyConnect {
         return $result;
     }
 
-    function getBlogPosts() {
+    function getBlogPosts($blogId) {
 
-
-        $decoded = json_decode($this->getResponse('https://api.hubapi.com/content/api/v2/blog-posts?hapikey='.getenv('HS_APIKEY')));
+        $url = 'https://api.hubapi.com/content/api/v2/blog-posts?hapikey='.getenv('HS_APIKEY').'&content_group_id='. $blogId;
+        
+        $file = fopen("url.txt", "w");
+        fwrite($file, $url);
+        fclose($file);
+        
+        $decoded = json_decode($this->getResponse($url));
 
         $blogCount = $decoded->total_count;
 
@@ -135,7 +140,7 @@ class apiKeyConnect {
         $decoded = json_decode($this->getResponse('https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey='.getenv('HS_APIKEY')));
         
         $vid = array(
-            "vid" => $decoded->vid;
+            "vid" => $decoded->vid
         );
 
         $subcription = array(
@@ -146,9 +151,9 @@ class apiKeyConnect {
         );
 
         $subscriptionEncoded = json_encode($subcription);
-        $url = 'https://api.hubapi.com/contacts/v1/contact/vid/' . $vid . '/profile?hapikey='.getenv('HS_APIKEY')));
+        $url = 'https://api.hubapi.com/contacts/v1/contact/vid/' . $vid . '/profile?hapikey='.getenv('HS_APIKEY');
 
-        this->sendToHubSpot($url, $subscriptionEncoded);
+        $this->sendToHubSpot($url, $subscriptionEncoded);
     }
 
 }

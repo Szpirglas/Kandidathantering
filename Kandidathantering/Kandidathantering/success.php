@@ -31,6 +31,27 @@ if (!isset($_COOKIE["loggedIn"])) {
 //Presenterar för- och efternamn som hämtats från API'n och lagrats i cookien
 
 echo "<h1>Välkommen, " . $_SESSION['user']['firstname']. " " . $_SESSION['user']['lastname'] . "!</h1>";
+echo '<br>';
+echo '<br>';
+echo '<br>';
+echo '<br>';
+echo '<br>';
+echo '<br>';
+
+ require_once("apiKeyConnect.php");
+
+
+    $api = new apiKeyConnect();
+    
+    $blogId = getenv('HSBLOG_JOBS');
+
+    $blogPosts = $api->getBlogPosts($blogId);
+
+    foreach ($blogPosts as $blogPost) {
+        echo $blogPost['author'];
+        echo $blogPost['post'];
+    }
+
 ?>
         <br>  <a href="logout.php">Log out!</a> <br>
 

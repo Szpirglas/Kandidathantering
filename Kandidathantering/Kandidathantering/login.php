@@ -48,16 +48,23 @@ men funkar det så funkar det! :) */
 
 if ($success == true) {
     
-    $decoded = json_decode($this->getResponse('https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey='.getenv('HS_APIKEY')));
+    require_once('apiKeyConnect.php');
+    
+    $getApi = new apiKeyConnect();
+    
+    $decoded = json_decode($getApi->getResponse('https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey='.getenv('HS_APIKEY')));
         
         $vid = array(
-            "vid" => $decoded->vid;
+            "vid" => $decoded->vid
         );
         
-    setcookie("loggedIn", $vid);
+    setcookie("loggedIn", $vid['vid']);
 
     header('Location: success.php');
+    
+    
 } else {
-    header('Location: index.php');
+   header('Location: index.php');
+    echo 'FAIL';
 }
 ?>

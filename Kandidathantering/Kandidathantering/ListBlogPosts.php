@@ -3,18 +3,24 @@
 
 <?php
 
-function getBlogPosts() {
-    require_once("apiKeyConnect.php");
+class ListBlogPosts {
+
+    function getBlogPosts($blogId) {
+        require_once("apiKeyConnect.php");
 
 
-    $api = new apiKeyConnect();
+        $api = new apiKeyConnect();
 
-    $blogPosts = $api->getBlogPosts();
 
-    foreach ($blogPosts as $blogPost) {
-        echo $blogPost['author'];
-        echo $blogPost['post'];
+
+        $blogPosts = $api->getBlogPosts($blogId);
+
+        foreach ($blogPosts as $blogPost) {
+            echo $blogPost['author'];
+            echo $blogPost['post'];
+        }
     }
+
 }
 ?>
         
