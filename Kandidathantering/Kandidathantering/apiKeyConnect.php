@@ -130,13 +130,8 @@ class apiKeyConnect {
         $this->sendToHubSpot($url, $profileEncoded);
     }
 
-    function subscribeNewsletter($email, $frequency)
+    function subscribeNewsletter($vid, $frequency)
     {
-        $decoded = json_decode($this->getResponse('https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey='.getenv('HS_APIKEY')));
-        
-        $vid = array(
-            "vid" => $decoded->vid;
-        );
 
         $subcription = array(
             array(
