@@ -155,5 +155,30 @@ class apiKeyConnect {
 
         $this->sendToHubSpot($url, $subscriptionEncoded);
     }
+    
+     function updateProfile($email, $firstname, $lastname, $interest) {
+        $profile = array(
+            'properties' => array(
+                array(
+                    'property' => 'email',
+                    'value' => $email
+                ),
+                array(
+                    'property' => 'firstname',
+                    'value' => $firstname
+                ),
+                array(
+                    'property' => 'lastname',
+                    'value' => $lastname),
+                array(
+                    'property' => 'intresse',
+                    'value' => $interest
+        )));
+        $profileEncoded = json_encode($profile);
+        
+        $url = 'https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey=' . getenv('HS_APIKEY');
+        $this->sendToHubSpot($url, $profileEncoded);
+        
+    }
 
 }
