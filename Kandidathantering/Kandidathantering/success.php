@@ -38,17 +38,6 @@ echo '<br>';
 echo '<br>';
 echo '<br>';
 
- require_once("apiKeyConnect.php");
-
-
-    $api = new apiKeyConnect();
-    
-    
-    $blogPost = $api->getBlogPost(5641931914);
-
-   echo $blogPost['author'];
-   echo $blogPost['title'];
-
 ?>
         <br>  <a href="logout.php">Log out!</a> <br>
 
