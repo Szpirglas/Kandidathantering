@@ -48,14 +48,10 @@ class apiKeyConnect {
         return $result;
     }
 
-    function getBlogPosts($blogId) {
+    function getBlog($blogId) {
 
         $url = 'https://api.hubapi.com/content/api/v2/blog-posts?hapikey='.getenv('HS_APIKEY').'&content_group_id='. $blogId;
-        
-        $file = fopen("url.txt", "w");
-        fwrite($file, $url);
-        fclose($file);
-        
+
         $decoded = json_decode($this->getResponse($url));
 
         $blogCount = $decoded->total_count;
@@ -69,7 +65,8 @@ class apiKeyConnect {
 
             $blogPosts[] = array(
                 "author" => $decoded->objects[$i]->author_name,
-                "post" => $decoded->objects[$i]->post_body);
+                "post" => $decoded->objects[$i]->post_body,
+                "image"=> $decoded->objects[$i]->featured_image);
         }
 
 
@@ -77,6 +74,24 @@ class apiKeyConnect {
         return $blogPosts;
     }
     
+    function getBlogPost($postId)
+    {
+        $url = 'https://api.hubapi.com/content/api/v2/blog-posts/'.$postId.'?hapikey='. getenv('HS_APIKEY');
+        
+        $decoded = json_decode($this->getResponse($url));
+        
+        
+        $blogPost = array(
+            "author"=>$decoded->author_name,
+            "author_email"=>$decoded->author_email,
+            "title"=>$decoded->title,
+            "body"=>$decoded->post_body
+        );
+        
+        return $blogPost;
+    }
+
+
     /**
      * Denna funktion hämtar profilinformationen från HubSpot via den inloggades epostadress
      * och returnerar sedan en array med informationen. 

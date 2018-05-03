@@ -43,14 +43,11 @@ echo '<br>';
 
     $api = new apiKeyConnect();
     
-    $blogId = getenv('HSBLOG_JOBS');
+    
+    $blogPost = $api->getBlogPost(5641931914);
 
-    $blogPosts = $api->getBlogPosts($blogId);
-
-    foreach ($blogPosts as $blogPost) {
-        echo $blogPost['author'];
-        echo $blogPost['post'];
-    }
+   echo $blogPost['author'];
+   echo $blogPost['title'];
 
 ?>
         <br>  <a href="logout.php">Log out!</a> <br>
