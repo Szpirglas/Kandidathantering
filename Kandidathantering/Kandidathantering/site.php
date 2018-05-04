@@ -57,9 +57,9 @@
                 <?php
 
                 function getBlogPosts() {
-                    require_once("apiKeyConnect.php");
+                    require_once("BlogHandler.php");
 
-                    $api = new apiKeyConnect();
+                    $api = new BlogHandler();
 
                     $blogPosts = $api->getBlog(getenv('HSBLOG_NEWS'));
 

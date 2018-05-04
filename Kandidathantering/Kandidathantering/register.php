@@ -39,8 +39,8 @@ if (filter_var($regEmail, FILTER_VALIDATE_EMAIL) AND
 
         if ($con->query($sql) === true) {
 
-            require_once 'apiKeyConnect.php';
-            $send = new apiKeyConnect();
+            require_once 'ProfileHandler.php';
+            $send = new ProfileHandler();
 
             $send->createProfile($regFirstName, $regLastName, $regEmail);
 

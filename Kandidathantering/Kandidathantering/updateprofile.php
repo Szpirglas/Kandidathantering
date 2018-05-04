@@ -24,9 +24,9 @@ $email = $_COOKIE['loggedIn'];
 
 
 
-require_once('apiKeyConnect.php');
+require_once('ProfileHandler.php');
 
-$updateProfile = new apiKeyConnect();
+$updateProfile = new ProfileHandler();
 $updateProfile->updateProfile($email, $firstname, $lastname, $interest);
  
 

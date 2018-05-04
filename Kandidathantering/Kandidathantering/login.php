@@ -48,9 +48,9 @@ men funkar det så funkar det! :) */
 
 if ($success == true) {
     
-    require_once('apiKeyConnect.php');
+    require_once('hsConnection.php');
     
-    $getApi = new apiKeyConnect();
+    $getApi = new hsConnection();
     
     $decoded = json_decode($getApi->getResponse('https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey='.getenv('HS_APIKEY')));
         
