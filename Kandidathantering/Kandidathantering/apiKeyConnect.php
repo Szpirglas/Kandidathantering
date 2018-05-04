@@ -146,11 +146,7 @@ class apiKeyConnect {
 
 
     function subscribeNewsletter($vid, $frequency) {
-        $decoded = json_decode($this->getResponse('https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey=' . getenv('HS_APIKEY')));
-
-        $vid = array(
-            "vid" => $decoded->vid
-        );
+        $decoded = json_decode($this->getResponse('https://api.hubapi.com/contacts/v1/contact/vid/' . $vid . '/profile?hapikey=' . getenv('HS_APIKEY')));
 
         $subcription = array(
             array(
