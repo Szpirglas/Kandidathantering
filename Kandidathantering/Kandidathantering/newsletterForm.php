@@ -9,8 +9,12 @@
     </head>
     <body>
         <div id="newsLetterForm"><form action="newsletter.php" method="post">
-                Epost: 
+                Epost: <br>
                 <input type="text" name="email"><br>
+                Intervall: <br>
+                <input type="checkbox" name="frequency" value="daily">Dagligen<br>
+                <input type="checkbox" name="frequency" value="weekly">Veckovis<br>
+                <input type="checkbox" name="frequency" value="monthly">Månadsvis<br>
             <input type="submit">                                                  
         
         </form></div>
