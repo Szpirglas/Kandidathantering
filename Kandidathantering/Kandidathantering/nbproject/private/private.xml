@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/Users/mattias/Documents/GitHub/Kandidathantering/Kandidathantering/Kandidathantering/blogHandler.php</file>
             <file>file:/Users/mattias/Documents/GitHub/Kandidathantering/Kandidathantering/Kandidathantering/index.php</file>
             <file>file:/Users/mattias/Documents/GitHub/Kandidathantering/Kandidathantering/Kandidathantering/.env</file>
@@ -17,6 +18,13 @@
             <file>file:/Users/mattias/Documents/GitHub/Kandidathantering/Kandidathantering/Kandidathantering/newsletterForm.php</file>
             <file>file:/Users/mattias/Documents/GitHub/Kandidathantering/Kandidathantering/Kandidathantering/updateprofile.php</file>
             <file>file:/Users/mattias/Documents/GitHub/Kandidathantering/Kandidathantering/Kandidathantering/register.php</file>
+=======
+            <file>file:/C:/Users/jrose/Documents/GitHub/Kandidathantering/Kandidathantering/Kandidathantering/.env</file>
+            <file>file:/C:/Users/jrose/Documents/GitHub/Kandidathantering/Kandidathantering/Kandidathantering/Blog.php</file>
+            <file>file:/C:/Users/jrose/Documents/GitHub/Kandidathantering/Kandidathantering/Kandidathantering/apiKeyConnect.php</file>
+            <file>file:/C:/Users/jrose/Documents/GitHub/Kandidathantering/Kandidathantering/Kandidathantering/site.php</file>
+            <file>file:/C:/Users/jrose/Documents/GitHub/Kandidathantering/Kandidathantering/Kandidathantering/style.css</file>
+>>>>>>> Jimmy
         </group>
     </open-files>
 </project-private>

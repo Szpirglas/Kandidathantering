@@ -1,10 +1,18 @@
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> Jimmy
 body{
     /*padding-left: 20%;
     padding-right: 20%;*/
     margin: 0;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> Jimmy
 
 }
 
@@ -65,10 +73,65 @@ section{
 .jobs{
     clear: both;
     width: 100%;
+<<<<<<< HEAD
     height: 50px;
     background: red;
 }
 
+=======
+
+}
+
+.jobContainer{
+    width: calc(100%/5);
+    display: inline-block;
+
+    overflow: hidden;
+}
+
+.jobContainer a{
+    text-decoration: none;
+    color: black;
+}
+
+.jobWrapper{
+    margin: 40px;
+}
+
+.imageWrapper{
+    height: 200px;
+    position: relative;
+}
+
+.jobListingImage{
+    left: 50%;
+    transform: translateX(-50%);
+
+    max-height: 200px;
+    max-width: 100%;
+    position: absolute;
+    bottom: 0;
+
+}
+
+
+
+.jobTitleButton{
+    margin-top: 20px;
+    border: 2px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+.jobTitleButton:hover{
+    background: black;
+    color: white;
+}
+
+
+
+
+>>>>>>> Jimmy
 .blog{
     width: 100%;
     display: flex;
@@ -77,20 +140,45 @@ section{
 }
 
 .viewBlog{
+<<<<<<< HEAD
     display: flex;
+=======
+/*    display: flex;
+>>>>>>> Jimmy
     justify-content: center;
 
 
 
 
+<<<<<<< HEAD
     align-items: center;
     float: left;
     width: 40%;
     background: black;
+=======
+    align-items: center;*/
+    float: left;
+    width: 40%;
+    background: black;
+    
+    
+    
+>>>>>>> Jimmy
 }
 
 .viewBlogBtn{
     position: absolute;
+<<<<<<< HEAD
+=======
+    text-align: center;
+    padding: 10px;
+    border: 2px solid white;
+    color: white;
+    
+ 
+  
+
+>>>>>>> Jimmy
 }
 
 .latestBlogPost{
@@ -134,8 +222,87 @@ section{
     }
 }
 
+<<<<<<< HEAD
+=======
+
+
+@media(max-width: 1600px) {
+    .jobContainer{
+        width: calc(100%/4);
+
+    }
+}
+
+@media(max-width: 1300px) {
+    .jobContainer{
+        width: calc(100%/3);
+
+    }
+}
+
+>>>>>>> Jimmy
 @media(max-width: 768px) {
     .imageGallery > video, .imageGallery > img{
         width: 100%;
     }
+<<<<<<< HEAD
+=======
+
+    .jobContainer{
+        width: calc(100%/2);
+
+    }
+}
+
+@media(max-width: 600px) {
+    .jobContainer{
+        width: calc(100%/1);
+
+    }
+}
+
+
+.jobPostContainer{
+    max-width: 700px;
+    margin: auto;
+    margin-top: 50px;
+
+}
+
+.jobPostContainer h1{
+
+    text-align: center;
+}
+
+.jobPostText{
+    margin: 20px;
+}
+
+.jobPostImage{
+    padding-bottom: 50px;
+}
+
+.jobPostImageWrapper{
+    height: 70vh;
+
+
+    max-width: inherit;
+
+    position: relative;
+
+
+}
+
+.jobPostImage{
+
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    max-width: 95%;
+    max-height: 100%;
+>>>>>>> Jimmy
 }

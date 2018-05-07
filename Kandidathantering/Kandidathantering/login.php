@@ -52,9 +52,15 @@ men funkar det så funkar det! :) */
 
 if ($success == true) {
     
+<<<<<<< HEAD
     require_once('hsConnection.php');
     
     $getApi = new hsConnection();
+=======
+    require_once('apiKeyConnect.php');
+    
+    $getApi = new apiKeyConnect();
+>>>>>>> Jimmy
     
     $decoded = json_decode($getApi->getResponse('https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey='.getenv('HS_APIKEY')));
         
@@ -65,11 +71,18 @@ if ($success == true) {
     setcookie("loggedIn", $vid['vid']);
 
     header('Location: success.php');
+<<<<<<< HEAD
    
+=======
+>>>>>>> Jimmy
     
     
 } else {
    header('Location: index.php');
+<<<<<<< HEAD
   
+=======
+    echo 'FAIL';
+>>>>>>> Jimmy
 }
 ?>
