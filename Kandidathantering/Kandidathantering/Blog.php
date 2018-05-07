@@ -12,7 +12,7 @@ function getBlogPosts() {
 
     $api = new apiKeyConnect();
 
-    $blogPosts = $api->getBlogPosts();
+    $blogPosts = $api->getBlog(getenv('HSBLOG_NEWS'));
 
     foreach ($blogPosts as $blogPost) {
         

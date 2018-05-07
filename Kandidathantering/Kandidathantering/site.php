@@ -43,15 +43,61 @@
         </section>
 
         <section class="jobs">
-            Here be jobs
+            <?php
+
+            function listJobs() {
+                require_once("apiKeyConnect.php");
+
+                $api = new apiKeyConnect();
+
+                $jobs = $api->getBlog(getenv('HSBLOG_JOBS'));
+
+
+
+
+                foreach ($jobs as $job) {
+
+                    echo("<div class='jobContainer'>" .
+                    "<div class='jobWrapper'>" .
+                    "<a href='job.php?" . $job['id'] . "'>" .
+                    "<div class='imageWrapper'>" .
+                    "<img class='jobListingImage' src='" . $job['image'] . "' alt='" . $job['title'] . "'/>" .
+                    "</div>" .
+                    "</a>" .
+                    "<a href='job.php?" . $job['id'] . "'>" .
+                    "<div class='jobTitleButton'>" . $job['title'] . "</div>" .
+                    "</a>" .
+                    "</div>" .
+                    "</div>");
+                }
+
+                //Skicka meddelande box, nästan samma kod osm ovan^
+                echo("<div class='jobContainer'>" .
+                "<div class='jobWrapper'>" .
+                "<a href=''>" .
+                "<div class='imageWrapper'>" .
+                "<img class='jobListingImage' src='content/bilder/meddelande.png' alt='meddelande'/>" .
+                "</div>" .
+                "</a>" .
+                "<a href=''>" .
+                "<div class='jobTitleButton'>Frågor? Skicka meddelande!</div>" .
+                "</a>" .
+                "</div>" .
+                "</div>");
+            }
+
+            listJobs();
+            ?>
         </section>
 
         <section class="blog">
             <div class="viewBlog">
                 // Fixa länk i action!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                <form class="viewBlogBtn" action="">
-                    <input type="submit" value="Se hela bloggen" />
-                </form>
+                <a href="blog.php">
+                    <div class="viewBlogBtn">
+                        Se hela bloggen
+                    </div>
+                </a>
             </div>
             <div class="latestBlogPost">
                 <?php
@@ -61,7 +107,7 @@
 
                     $api = new apiKeyConnect();
 
-                    $blogPosts = $api->getBlogPosts();
+                    $blogPosts = $api->getBlog(getenv('HSBLOG_NEWS'));
 
 
                     foreach ($blogPosts as $blogPost) {
@@ -85,53 +131,55 @@
 
         <section class="imageGallery">
 
-                    <img src="content/ord/fotboll.png"/>
-               
-                    <video autoplay muted loop>
-                        <source src="content/videos/trappa.mp4" type="video/mp4">
-                    </video>
-               
-                    <img src="content/ord/friskvård.png"/>
-                    <img src="content/bilder/reception.jpg"/>
-                    <img src="content/ord/fika.png"/>
-                    <img src="content/bilder/trappa.jpg"/>                    
+            <img src="content/ord/fotboll.png"/>
+
+            <video autoplay muted loop>
+                <source src="content/videos/trappa.mp4" type="video/mp4">
+            </video>
+
+            <img src="content/ord/friskvård.png"/>
+            <img src="content/bilder/reception.jpg"/>
+            <img src="content/ord/fika.png"/>
+            <img src="content/bilder/trappa.jpg"/>                    
 <!--                    <img src="content/bilder/hus.jpg"/>-->
-                    <img src="content/ord/flamingo.png"/>
+            <img src="content/ord/flamingo.png"/>
 <!--                    <img src="content/bilder/fikabord.png"/>-->
-                    <img src="content/bilder/glad.jpg"/>
-                    <img src="content/ord/hus.png"/>
-                    
-                    <video autoplay muted loop>
-                        <source src="content/videos/filma.mp4" type="video/mp4">
-                    </video>
-                    
-                    <img src="content/ord/skratt.png"/>
-                    <img src="content/bilder/glass.jpg"/>
-                    <img src="content/ord/godis.png"/>
+            <img src="content/bilder/glad.jpg"/>
+            <img src="content/ord/hus.png"/>
+
+            <video autoplay muted loop>
+                <source src="content/videos/filma.mp4" type="video/mp4">
+            </video>
+
+            <img src="content/ord/skratt.png"/>
+            <img src="content/bilder/glass.jpg"/>
+            <img src="content/ord/godis.png"/>
 <!--                    <img src="content/bilder/kaffe.jpg"/>-->
-                    
-                    <video autoplay muted loop>
-                        <source src="content/videos/rita.mp4" type="video/mp4">
-                    </video>
-                    
-                    <img src="content/ord/hackaton.png"/>
-                    
-                    <video class="hideIf2000pxOrMore" autoplay muted loop>
-                        <source src="content/videos/megaman.mp4" type="video/mp4">
-                    </video>
-                    
-                    <img class="hideIf2000pxOrMore" src="content/ord/läge.png"/>
-                    <img class="hideIf2000pxOrMore" src="content/bilder/skratt.jpg"/>
+
+            <video autoplay muted loop>
+                <source src="content/videos/rita.mp4" type="video/mp4">
+            </video>
+
+            <img src="content/ord/hackaton.png"/>
+
+            <video class="hideIf2000pxOrMore" autoplay muted loop>
+                <source src="content/videos/megaman.mp4" type="video/mp4">
+            </video>
+
+            <img class="hideIf2000pxOrMore" src="content/ord/läge.png"/>
+            <img class="hideIf2000pxOrMore" src="content/bilder/skratt.jpg"/>
 <!--                    <img src="content/ord/code.png"/>-->
-                    
-<!--                    <video autoplay muted loop>
-                        <source src="content/videos/roligt.mp4" type="video/mp4">
-                    </video>-->
-                    
-<!--                    <video autoplay muted loop>
-                        <source src="content/videos/lava.mp4" type="video/mp4">
-                    </video>-->
+
+            <!--                    <video autoplay muted loop>
+                                    <source src="content/videos/roligt.mp4" type="video/mp4">
+                                </video>-->
+
+            <!--                    <video autoplay muted loop>
+                                    <source src="content/videos/lava.mp4" type="video/mp4">
+                                </video>-->
         </section>
+
+
 
 
     </body>
