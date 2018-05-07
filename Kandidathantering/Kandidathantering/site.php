@@ -43,15 +43,15 @@
         </section>
 
         <section class="jobs">
-<<<<<<< HEAD
+
             Here be jobs
-=======
+
             <?php
 
             function listJobs() {
-                require_once("apiKeyConnect.php");
+                require_once("blogHandler.php");
 
-                $api = new apiKeyConnect();
+                $api = new BlogHandler();
 
                 $jobs = $api->getBlog(getenv('HSBLOG_JOBS'));
 
@@ -91,37 +91,37 @@
 
             listJobs();
             ?>
->>>>>>> Jimmy
+
         </section>
 
         <section class="blog">
             <div class="viewBlog">
                 // Fixa länk i action!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-<<<<<<< HEAD
+
                 <form class="viewBlogBtn" action="">
                     <input type="submit" value="Se hela bloggen" />
                 </form>
-=======
+
                 <a href="blog.php">
                     <div class="viewBlogBtn">
                         Se hela bloggen
                     </div>
                 </a>
->>>>>>> Jimmy
+
             </div>
             <div class="latestBlogPost">
                 <?php
 
                 function getBlogPosts() {
-<<<<<<< HEAD
+
                     require_once("BlogHandler.php");
 
                     $api = new BlogHandler();
-=======
-                    require_once("apiKeyConnect.php");
 
-                    $api = new apiKeyConnect();
->>>>>>> Jimmy
+                    require_once("blogHandler.php");
+
+                    $api = new BlogHandler();
+
 
                     $blogPosts = $api->getBlog(getenv('HSBLOG_NEWS'));
 
@@ -147,7 +147,7 @@
 
         <section class="imageGallery">
 
-<<<<<<< HEAD
+<<
                     <img src="content/ord/fotboll.png"/>
                
                     <video autoplay muted loop>
@@ -197,7 +197,7 @@
         </section>
 
 
-=======
+
             <img src="content/ord/fotboll.png"/>
 
             <video autoplay muted loop>
@@ -249,7 +249,7 @@
 
 
 
->>>>>>> Jimmy
+>
     </body>
 </html>
 

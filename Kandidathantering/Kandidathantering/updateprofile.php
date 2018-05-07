@@ -23,16 +23,14 @@ $interest = filter_input(INPUT_POST, 'intresse');
 $email = $_COOKIE['loggedIn'];
 
 
-
-<<<<<<< HEAD
 require_once('ProfileHandler.php');
 
 $updateProfile = new ProfileHandler();
-=======
+
 require_once('apiKeyConnect.php');
 
 $updateProfile = new apiKeyConnect();
->>>>>>> Jimmy
+
 $updateProfile->updateProfile($email, $firstname, $lastname, $interest);
  
 
