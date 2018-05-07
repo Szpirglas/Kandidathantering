@@ -1,5 +1,7 @@
 <?php
 
+
+
 //Informationen som fyllts in i formuläret i index.php hämtas och lagras i variabler
 
 $email = filter_input(INPUT_POST, 'email');
@@ -24,13 +26,15 @@ if ($email != null AND $password != null) {
 
 
         $result = $con->query($sql);
+        
+        
 
         
         if ($result->num_rows == 1) {
             $success = true;
         } else {
 
-
+            $rows = $result->num_rows;
             $success = false;
         }
 
@@ -61,10 +65,11 @@ if ($success == true) {
     setcookie("loggedIn", $vid['vid']);
 
     header('Location: success.php');
+   
     
     
 } else {
    header('Location: index.php');
-    echo 'FAIL';
+  
 }
 ?>

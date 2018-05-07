@@ -46,9 +46,9 @@ if (filter_var($regEmail, FILTER_VALIDATE_EMAIL) AND
 
             $con->close();
 
-            setcookie("loggedIn", $regEmail);
+            
 
-            header('Location: success.php');
+            header('Location: index.php');
         } else {
             echo "Error: " . $sql . "<br>" . $con->error;
 
