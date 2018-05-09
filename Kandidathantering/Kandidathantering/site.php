@@ -45,7 +45,6 @@
         <section class="jobs">
 
 
-
             <?php
 
             function listJobs() {
@@ -98,9 +97,11 @@
             <div class="viewBlog">
                 // Fixa länk i action!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+
                 <form class="viewBlogBtn" action="Blog.php">
                     <input type="submit" value="Se hela bloggen" />
                 </form>
+
 
 
             </div>
@@ -109,7 +110,9 @@
 
                 function getBlogPosts() {
 
+
                     require_once("blogHandler.php");
+
 
                     $api = new BlogHandler();
 
@@ -141,6 +144,8 @@
         </section>
 
         <section class="imageGallery">
+
+
 
 
             <img src="content/ord/fotboll.png"/>
@@ -191,6 +196,8 @@
                                 </video>-->
         </section>
 
+
 </body>
+
 </html>
 

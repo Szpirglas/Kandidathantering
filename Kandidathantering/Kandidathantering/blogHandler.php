@@ -42,6 +42,7 @@ class BlogHandler {
                 "image" => $decoded->objects[$i]->featured_image,
                 "id" => $decoded->objects[$i]->id,
                 "title" => $decoded->objects[$i]->title
+
             );
         }
 
