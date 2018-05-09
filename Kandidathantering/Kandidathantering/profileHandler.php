@@ -41,7 +41,8 @@ class ProfileHandler {
         $profile = array(
             "firstname" => $decoded->properties->firstname->value,
             "lastname" => $decoded->properties->lastname->value,
-            "email" => $decoded->properties->email->value);
+            "email" => $decoded->properties->email->value,
+            "vid" => $vid);
 
 
 

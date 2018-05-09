@@ -12,7 +12,7 @@ if (!isset($_COOKIE["loggedIn"])) {
     session_start();
     $_SESSION['user'] = $profile;
     
-    unset($connect);
+  
 
 
 }

@@ -1,4 +1,57 @@
-<?php ?>
+<?php
+
+session_start();
+
+     function sendQuery($query) {
+        
+        require_once 'dbConnection.php';
+        
+        $db = new dbConnection();
+        
+        $connect = $this->db->connect();
+
+        if ($connect->connect_error) {
+            echo "Connection failed: " . $con->connect_error;
+        }
+        
+        $result = $connect->query($query);
+        
+        $connect->close();
+        
+        return $result;
+    }
+    
+    function hasApplied($vid, $jobId)
+    {
+        $query = "SELECT * FROM JOBAPPLY WHERE USERID = " . $vid . " AND JOBPOSTID = " . $jobId;
+        
+        $result = $this->sendQuery($query);
+        
+        if ($result->num_rows > 0)
+        {
+            
+            return true;
+            
+        }
+        
+        else {
+            
+            return false;
+            
+        }
+        
+        function Apply($vid, $jobId)
+        {
+            $query = "INSERT INTO JOBAPPLY (USERID, JOBPOSTID, STATUS) VALUES (" . $vid . ", " . $jobId . ", 'Applied')";
+            
+            $this->sendQuery($query);
+        }
+        
+        
+    }
+
+
+?>
 
 <!DOCTYPE html>
 <!--
@@ -37,6 +90,24 @@ and open the template in the editor.
         "<div class=''>" . $job['body'] . "</div>" .
         "</div>" .
         "</div>");
+        
+       
+       
+       
+       
+       if ($this->hasApplied($_SESSION['user']['vid'], $jobId))
+       {
+           echo '<button type="button" disabled>Sök detta jobb</button>';
+       }
+       
+       else {
+           
+           echo 'tada!';
+         
+               
+           
+       }
+       
         ?>
     </body>
 </html>
