@@ -43,12 +43,15 @@
         </section>
 
         <section class="jobs">
+
+
+
             <?php
 
             function listJobs() {
-                require_once("apiKeyConnect.php");
+                require_once("blogHandler.php");
 
-                $api = new apiKeyConnect();
+                $api = new BlogHandler();
 
                 $jobs = $api->getBlog(getenv('HSBLOG_JOBS'));
 
@@ -74,12 +77,12 @@
                 //Skicka meddelande box, nästan samma kod osm ovan^
                 echo("<div class='jobContainer'>" .
                 "<div class='jobWrapper'>" .
-                "<a href=''>" .
+                "<a href='message.php'>" .
                 "<div class='imageWrapper'>" .
                 "<img class='jobListingImage' src='content/bilder/meddelande.png' alt='meddelande'/>" .
                 "</div>" .
                 "</a>" .
-                "<a href=''>" .
+                "<a href='message.php'>" .
                 "<div class='jobTitleButton'>Frågor? Skicka meddelande!</div>" .
                 "</a>" .
                 "</div>" .
@@ -88,24 +91,32 @@
 
             listJobs();
             ?>
+
         </section>
 
         <section class="blog">
             <div class="viewBlog">
                 // Fixa länk i action!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                <a href="blog.php">
-                    <div class="viewBlogBtn">
-                        Se hela bloggen
-                    </div>
-                </a>
+
+                <form class="viewBlogBtn" action="Blog.php">
+                    <input type="submit" value="Se hela bloggen" />
+                </form>
+
+
             </div>
             <div class="latestBlogPost">
                 <?php
 
                 function getBlogPosts() {
-                    require_once("apiKeyConnect.php");
 
-                    $api = new apiKeyConnect();
+                    require_once("blogHandler.php");
+
+                    $api = new BlogHandler();
+
+                    require_once("blogHandler.php");
+
+                    $api = new BlogHandler();
+
 
                     $blogPosts = $api->getBlog(getenv('HSBLOG_NEWS'));
 
@@ -130,6 +141,7 @@
         </section>
 
         <section class="imageGallery">
+
 
             <img src="content/ord/fotboll.png"/>
 
@@ -179,9 +191,6 @@
                                 </video>-->
         </section>
 
-
-
-
-    </body>
+</body>
 </html>
 

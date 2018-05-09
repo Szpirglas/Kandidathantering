@@ -1,10 +1,4 @@
 <?php
 
 
-
-
-
-
-
-
-    require_once('ApiKeyconnect.php');
+$newsLetterEmail = filter_input(INPUT_POST, 'email');

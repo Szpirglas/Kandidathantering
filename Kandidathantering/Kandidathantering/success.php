@@ -1,5 +1,5 @@
 <?php
-require_once("apiKeyConnect.php");
+require_once("profileHandler.php");
 
 
 //Kontrollerar om det finns en cookie, annars skickas användaren tillbaka till login-sidan
@@ -10,7 +10,7 @@ if (!isset($_COOKIE["loggedIn"])) {
     
     //Om cookie finns, hämtas profilinformationen via API'et och lagras i en session.
     
-    $connect = new apiKeyConnect();
+    $connect = new ProfileHandler();
 
     $profile = $connect->getProfile($_COOKIE["loggedIn"]);
 

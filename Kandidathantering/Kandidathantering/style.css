@@ -126,32 +126,30 @@ section{
 }
 
 .viewBlog{
-/*    display: flex;
+    display: flex;
     justify-content: center;
 
 
 
 
-    align-items: center;*/
+    align-items: center;
     float: left;
     width: 40%;
     background: black;
-    
-    
-    
 }
 
 .viewBlogBtn{
     position: absolute;
-    text-align: center;
-    padding: 10px;
-    border: 2px solid white;
-    color: white;
-    
- 
-  
 
 }
+
+.viewBlog input { 
+    border:2px solid white; 
+    padding: 10px;
+    background-color: black;
+    color: white;
+    
+} 
 
 .latestBlogPost{
     float: left;
@@ -271,4 +269,13 @@ section{
 
     max-width: 95%;
     max-height: 100%;
+}
+
+.messageContainer textArea{
+    min-width: 750px;
+    min-height: 600px;
+}
+
+.messageContainer .hbspt-form{
+    text-align: center;
 }

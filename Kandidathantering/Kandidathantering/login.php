@@ -1,5 +1,7 @@
 <?php
 
+
+
 //Informationen som fyllts in i formuläret i index.php hämtas och lagras i variabler
 
 $email = filter_input(INPUT_POST, 'email');
@@ -24,13 +26,15 @@ if ($email != null AND $password != null) {
 
 
         $result = $con->query($sql);
+        
+        
 
         
         if ($result->num_rows == 1) {
             $success = true;
         } else {
 
-
+            $rows = $result->num_rows;
             $success = false;
         }
 
@@ -48,9 +52,13 @@ men funkar det så funkar det! :) */
 
 if ($success == true) {
     
-    require_once('apiKeyConnect.php');
+
+    require_once('hsConnection.php');
     
-    $getApi = new apiKeyConnect();
+    $getApi = new hsConnection();
+
+
+
     
     $decoded = json_decode($getApi->getResponse('https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey='.getenv('HS_APIKEY')));
         
@@ -61,10 +69,11 @@ if ($success == true) {
     setcookie("loggedIn", $vid['vid']);
 
     header('Location: success.php');
-    
+
     
 } else {
    header('Location: index.php');
-    echo 'FAIL';
+
+
 }
 ?>

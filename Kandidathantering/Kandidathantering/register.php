@@ -39,16 +39,16 @@ if (filter_var($regEmail, FILTER_VALIDATE_EMAIL) AND
 
         if ($con->query($sql) === true) {
 
-            require_once 'apiKeyConnect.php';
-            $send = new apiKeyConnect();
+            require_once 'ProfileHandler.php';
+            $send = new ProfileHandler();
 
             $send->createProfile($regFirstName, $regLastName, $regEmail);
 
             $con->close();
 
-            setcookie("loggedIn", $regEmail);
+            
 
-            header('Location: success.php');
+            header('Location: index.php');
         } else {
             echo "Error: " . $sql . "<br>" . $con->error;
 
