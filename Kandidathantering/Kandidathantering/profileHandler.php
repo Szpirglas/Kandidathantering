@@ -26,9 +26,12 @@ class ProfileHandler {
         
         $decoded = json_decode($this->hsConnect->getResponse('https://api.hubapi.com/contacts/v1/contact/vid/' . $vid . '/profile?hapikey=' . getenv('HS_APIKEY')));
 
-        $profile[] = array(
+
+        $profile = array(
             "firstname" => $decoded->properties->firstname->value,
-            "lastname" => $decoded->properties->lastname->value);
+            "lastname" => $decoded->properties->lastname->value,
+            "email" => $decoded->properties->email->value);
+
 
 
         return $profile;

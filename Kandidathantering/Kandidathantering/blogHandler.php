@@ -40,7 +40,9 @@ class BlogHandler {
                 "author" => $decoded->objects[$i]->author_name,
                 "post" => $decoded->objects[$i]->post_body,
                 "image" => $decoded->objects[$i]->featured_image,
-                "id" => $decoded->objects[$i]->id
+                "id" => $decoded->objects[$i]->id,
+                "title" => $decoded->objects[$i]->title
+
             );
         }
 

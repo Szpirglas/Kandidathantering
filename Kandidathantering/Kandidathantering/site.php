@@ -44,7 +44,6 @@
 
         <section class="jobs">
 
-            Here be jobs
 
             <?php
 
@@ -77,12 +76,12 @@
                 //Skicka meddelande box, nästan samma kod osm ovan^
                 echo("<div class='jobContainer'>" .
                 "<div class='jobWrapper'>" .
-                "<a href=''>" .
+                "<a href='message.php'>" .
                 "<div class='imageWrapper'>" .
                 "<img class='jobListingImage' src='content/bilder/meddelande.png' alt='meddelande'/>" .
                 "</div>" .
                 "</a>" .
-                "<a href=''>" .
+                "<a href='message.php'>" .
                 "<div class='jobTitleButton'>Frågor? Skicka meddelande!</div>" .
                 "</a>" .
                 "</div>" .
@@ -98,15 +97,12 @@
             <div class="viewBlog">
                 // Fixa länk i action!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-                <form class="viewBlogBtn" action="">
+
+                <form class="viewBlogBtn" action="Blog.php">
                     <input type="submit" value="Se hela bloggen" />
                 </form>
 
-                <a href="blog.php">
-                    <div class="viewBlogBtn">
-                        Se hela bloggen
-                    </div>
-                </a>
+
 
             </div>
             <div class="latestBlogPost">
@@ -114,7 +110,9 @@
 
                 function getBlogPosts() {
 
-                    require_once("BlogHandler.php");
+
+                    require_once("blogHandler.php");
+
 
                     $api = new BlogHandler();
 
@@ -147,54 +145,6 @@
 
         <section class="imageGallery">
 
-<<
-                    <img src="content/ord/fotboll.png"/>
-               
-                    <video autoplay muted loop>
-                        <source src="content/videos/trappa.mp4" type="video/mp4">
-                    </video>
-               
-                    <img src="content/ord/friskvård.png"/>
-                    <img src="content/bilder/reception.jpg"/>
-                    <img src="content/ord/fika.png"/>
-                    <img src="content/bilder/trappa.jpg"/>                    
-<!--                    <img src="content/bilder/hus.jpg"/>-->
-                    <img src="content/ord/flamingo.png"/>
-<!--                    <img src="content/bilder/fikabord.png"/>-->
-                    <img src="content/bilder/glad.jpg"/>
-                    <img src="content/ord/hus.png"/>
-                    
-                    <video autoplay muted loop>
-                        <source src="content/videos/filma.mp4" type="video/mp4">
-                    </video>
-                    
-                    <img src="content/ord/skratt.png"/>
-                    <img src="content/bilder/glass.jpg"/>
-                    <img src="content/ord/godis.png"/>
-<!--                    <img src="content/bilder/kaffe.jpg"/>-->
-                    
-                    <video autoplay muted loop>
-                        <source src="content/videos/rita.mp4" type="video/mp4">
-                    </video>
-                    
-                    <img src="content/ord/hackaton.png"/>
-                    
-                    <video class="hideIf2000pxOrMore" autoplay muted loop>
-                        <source src="content/videos/megaman.mp4" type="video/mp4">
-                    </video>
-                    
-                    <img class="hideIf2000pxOrMore" src="content/ord/läge.png"/>
-                    <img class="hideIf2000pxOrMore" src="content/bilder/skratt.jpg"/>
-<!--                    <img src="content/ord/code.png"/>-->
-                    
-<!--                    <video autoplay muted loop>
-                        <source src="content/videos/roligt.mp4" type="video/mp4">
-                    </video>-->
-                    
-<!--                    <video autoplay muted loop>
-                        <source src="content/videos/lava.mp4" type="video/mp4">
-                    </video>-->
-        </section>
 
 
 
@@ -247,9 +197,7 @@
         </section>
 
 
+</body>
 
-
->
-    </body>
 </html>
 
