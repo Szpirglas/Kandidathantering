@@ -7,12 +7,10 @@ require __DIR__ . '/vendor/autoload.php';
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
 
-require 'hsConnection.php';
+require_once 'hsConnection.php';
 
 class ProfileHandler {
-    
 
-    
     protected $hsConnect;
     
     function __construct()

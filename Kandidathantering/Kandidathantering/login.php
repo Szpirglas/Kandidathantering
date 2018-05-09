@@ -61,11 +61,7 @@ if ($success == true) {
     
     setcookie("loggedIn", $vid);
     
-   
-    $profile = $connect->getProfile($vid);
 
-    session_start();
-    $_SESSION['user'] = $profile;
     
     header('Location: index.php');
     

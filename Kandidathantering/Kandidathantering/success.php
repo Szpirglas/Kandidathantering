@@ -1,7 +1,7 @@
 <?php
 
 
-//Kontrollerar om det finns en cookie, annars skickas användaren tillbaka till login-sidan
+
 
 ?>
 <html>

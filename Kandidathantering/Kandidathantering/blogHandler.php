@@ -7,20 +7,24 @@ require __DIR__ . '/vendor/autoload.php';
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
 
-require 'hsConnection.php';
-
-
+require_once 'hsConnection.php';
 
 class BlogHandler {
-    
+
+    protected $hsConnect;
+
+    function __construct() {
+
+        $this->hsConnect = new hsConnection();
+    }
 
     function getBlog($blogId) {
 
-        $hsConnect = new hsConnection();
+
 
         $url = 'https://api.hubapi.com/content/api/v2/blog-posts?hapikey=' . getenv('HS_APIKEY') . '&content_group_id=' . $blogId;
 
-        $decoded = json_decode($hsConnect->getResponse($url));
+        $decoded = json_decode($this->hsConnect->getResponse($url));
 
         $blogCount = $decoded->total_count;
 
@@ -37,7 +41,6 @@ class BlogHandler {
                 "image" => $decoded->objects[$i]->featured_image,
                 "id" => $decoded->objects[$i]->id,
                 "title" => $decoded->objects[$i]->title
-
             );
         }
 
@@ -47,15 +50,15 @@ class BlogHandler {
     }
 
     function getBlogPost($postId) {
-        
-        $hsConnect = new hsConnection();
+
+  
 
 
         $url = 'https://api.hubapi.com/content/api/v2/blog-posts/' . $postId . '?hapikey=' . getenv('HS_APIKEY');
 
 
 
-        $decoded = json_decode($hsConnect->getResponse($url));
+        $decoded = json_decode($this->hsConnect->getResponse($url));
 
 
         $blogPost = array(

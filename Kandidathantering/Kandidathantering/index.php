@@ -1,9 +1,20 @@
-<?php if (!isset($_COOKIE["loggedIn"])) {
-
-   
-} else {
+<?php
+if (!isset($_COOKIE["loggedIn"])) {
     
+} else {
+
+    require_once 'profileHandler.php';
+
+    $connect = new ProfileHandler();
+
+    $profile = $connect->getProfile($_COOKIE['loggedIn']);
+
     session_start();
+    $_SESSION['user'] = $profile;
+    
+    unset($connect);
+
+
 }
 ?>
 
@@ -46,15 +57,11 @@
 
         </section>
         <section class="profile">
-            <?php 
-            if (!isset($_COOKIE["loggedIn"])){
-            include_once 'loginform.php'; 
-            
-            }
-            
-            else{
-               include_once 'success.php';
-                
+            <?php
+            if (!isset($_COOKIE["loggedIn"])) {
+                include_once 'loginform.php';
+            } else {
+                include_once 'success.php';
             }
             ?>
         </section>
@@ -62,51 +69,46 @@
         <section class="jobs">
 
 
-            <?php
+<?php
+require_once 'blogHandler.php';
 
-            function listJobs() {
-                require_once("blogHandler.php");
+$api = new BlogHandler();
 
-                $api = new BlogHandler();
-
-                $jobs = $api->getBlog(getenv('HSBLOG_JOBS'));
+$jobs = $api->getBlog(getenv('HSBLOG_JOBS'));
 
 
 
 
-                foreach ($jobs as $job) {
+foreach ($jobs as $job) {
 
-                    echo("<div class='jobContainer'>" .
-                    "<div class='jobWrapper'>" .
-                    "<a href='job.php?" . $job['id'] . "'>" .
-                    "<div class='imageWrapper'>" .
-                    "<img class='jobListingImage' src='" . $job['image'] . "' alt='" . $job['title'] . "'/>" .
-                    "</div>" .
-                    "</a>" .
-                    "<a href='job.php?" . $job['id'] . "'>" .
-                    "<div class='jobTitleButton'>" . $job['title'] . "</div>" .
-                    "</a>" .
-                    "</div>" .
-                    "</div>");
-                }
+    echo("<div class='jobContainer'>" .
+    "<div class='jobWrapper'>" .
+    "<a href='job.php?" . $job['id'] . "'>" .
+    "<div class='imageWrapper'>" .
+    "<img class='jobListingImage' src='" . $job['image'] . "' alt='" . $job['title'] . "'/>" .
+    "</div>" .
+    "</a>" .
+    "<a href='job.php?" . $job['id'] . "'>" .
+    "<div class='jobTitleButton'>" . $job['title'] . "</div>" .
+    "</a>" .
+    "</div>" .
+    "</div>");
+}
 
-                //Skicka meddelande box, nästan samma kod osm ovan^
-                echo("<div class='jobContainer'>" .
-                "<div class='jobWrapper'>" .
-                "<a href='message.php'>" .
-                "<div class='imageWrapper'>" .
-                "<img class='jobListingImage' src='content/bilder/meddelande.png' alt='meddelande'/>" .
-                "</div>" .
-                "</a>" .
-                "<a href='message.php'>" .
-                "<div class='jobTitleButton'>Frågor? Skicka meddelande!</div>" .
-                "</a>" .
-                "</div>" .
-                "</div>");
-            }
-
-            listJobs();
-            ?>
+//Skicka meddelande box, nästan samma kod osm ovan^
+echo("<div class='jobContainer'>" .
+ "<div class='jobWrapper'>" .
+ "<a href='message.php'>" .
+ "<div class='imageWrapper'>" .
+ "<img class='jobListingImage' src='content/bilder/meddelande.png' alt='meddelande'/>" .
+ "</div>" .
+ "</a>" .
+ "<a href='message.php'>" .
+ "<div class='jobTitleButton'>Frågor? Skicka meddelande!</div>" .
+ "</a>" .
+ "</div>" .
+ "</div>");
+?>
 
         </section>
 
@@ -123,36 +125,36 @@
 
             </div>
             <div class="latestBlogPost">
-                <?php
+<?php
 
-                function getBlogPosts() {
-
-
-
-                    require_once("blogHandler.php");
-
-                    $api = new BlogHandler();
+function getBlogPosts() {
 
 
-                    $blogPosts = $api->getBlog(getenv('HSBLOG_NEWS'));
+
+    require_once 'blogHandler.php';
+
+    $api = new BlogHandler();
 
 
-                    foreach ($blogPosts as $blogPost) {
+    $blogPosts = $api->getBlog(getenv('HSBLOG_NEWS'));
 
-                        echo("<div class='blogPostContainer'>" .
-                        "<div class='blogPostTitle'><h2>" . $blogPost['title'] . "</h2></div>" .
-                        "<div class='blogPostPost'>" . $blogPost['post'] . "</div>" .
-                        "<div class='blogPostAuthor'>" . $blogPost['author'] . "</div>" .
-                        "</div>");
 
-                        if (strlen($blogPost['title']) >= 1) {
-                            break;
-                        }
-                    }
-                }
+    foreach ($blogPosts as $blogPost) {
 
-                getBlogPosts();
-                ?>
+        echo("<div class='blogPostContainer'>" .
+        "<div class='blogPostTitle'><h2>" . $blogPost['title'] . "</h2></div>" .
+        "<div class='blogPostPost'>" . $blogPost['post'] . "</div>" .
+        "<div class='blogPostAuthor'>" . $blogPost['author'] . "</div>" .
+        "</div>");
+
+        if (strlen($blogPost['title']) >= 1) {
+            break;
+        }
+    }
+}
+
+getBlogPosts();
+?>
             </div>
         </section>
 
@@ -210,7 +212,7 @@
         </section>
 
 
-</body>
+    </body>
 
 </html>
 

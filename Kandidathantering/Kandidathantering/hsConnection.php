@@ -8,6 +8,10 @@ $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
 
 class hsConnection {
+    
+    function __construct() {
+        
+    }
 
 
     function sendToHubSpot($url, $json) {
