@@ -21,6 +21,19 @@ class ProfileHandler {
         
     }
     
+    function getProfileId($email)
+    {
+           $decoded = json_decode($this->hsConnect->getResponse('https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey='.getenv('HS_APIKEY')));
+        
+        $vid = array(
+            "vid" => $decoded->vid
+        );
+        
+        return $vid['vid'];
+        
+        
+    }
+    
     function getProfile($vid) {
         
         

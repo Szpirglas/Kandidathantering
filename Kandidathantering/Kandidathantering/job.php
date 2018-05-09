@@ -10,8 +10,8 @@ and open the template in the editor.
     <head>
         <title> <?php
         $jobId = $_SERVER['QUERY_STRING'];
-        require_once("apiKeyConnect.php");
-        $api = new apiKeyConnect();
+        require_once("blogHandler.php");
+        $api = new BlogHandler();
         $job = $api->getBlogPost($jobId);
 
         echo $job['title'];
@@ -20,11 +20,12 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
+    
     <body>
         <?php
         $jobId = $_SERVER['QUERY_STRING'];
-        require_once("apiKeyConnect.php");
-        $api = new apiKeyConnect();
+        require_once("blogHandler.php");
+        $api = new BlogHandler();
         $job = $api->getBlogPost($jobId);
 
         echo("<div class='jobPostContainer'>" .

@@ -53,22 +53,23 @@ men funkar det så funkar det! :) */
 if ($success == true) {
     
 
-    require_once('hsConnection.php');
+    require_once 'profileHandler.php';
     
-    $getApi = new hsConnection();
-
-
-
+    $connect = new ProfileHandler();
     
-    $decoded = json_decode($getApi->getResponse('https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey='.getenv('HS_APIKEY')));
-        
-        $vid = array(
-            "vid" => $decoded->vid
-        );
-        
-    setcookie("loggedIn", $vid['vid']);
+    $vid = $connect->getProfileId($email);
+    
+    setcookie("loggedIn", $vid);
+    
+   
+    $profile = $connect->getProfile($vid);
 
-    header('Location: success.php');
+    session_start();
+    $_SESSION['user'] = $profile;
+    
+    header('Location: index.php');
+    
+
 
     
 } else {
