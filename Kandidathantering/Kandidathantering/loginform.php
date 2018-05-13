@@ -24,12 +24,12 @@ if (isset($_COOKIE["loggedIn"]))
         <h1>LOGGA IN</h1>
         <br>
         <br>
-         <div id="loginForm"><form action="login.php" method="post">
+         <div class="loginForm"><form action="login.php" method="post">
          
                  E-mail: <br>
-                 <input type="text" name="email"><br>
+                 <input type="text" name="email"><br><br>
                  Password: <br>
-                 <input type="password" name="password"><br>
+                 <input type="password" name="password"><br><br>
             <input type="submit">
                 
             <br>

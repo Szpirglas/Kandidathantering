@@ -3,18 +3,7 @@ if (!isset($_COOKIE["loggedIn"])) {
     
 } else {
 
-    require_once 'profileHandler.php';
-
-    $connect = new ProfileHandler();
-
-    $profile = $connect->getProfile($_COOKIE['loggedIn']);
-
     session_start();
-    $_SESSION['user'] = $profile;
-    
-  
-
-
 }
 ?>
 
@@ -26,6 +15,7 @@ if (!isset($_COOKIE["loggedIn"])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Arvo">
     </head>
     <body>
         <section class="hero">        
@@ -70,44 +60,49 @@ if (!isset($_COOKIE["loggedIn"])) {
 
 
 <?php
-require_once 'blogHandler.php';
 
-$api = new BlogHandler();
+function listJobs() {
+    require_once("blogHandler.php");
 
-$jobs = $api->getBlog(getenv('HSBLOG_JOBS'));
+    $api = new BlogHandler();
+
+    $jobs = $api->getBlog(getenv('HSBLOG_JOBS'));
 
 
 
 
-foreach ($jobs as $job) {
+    foreach ($jobs as $job) {
 
+        echo("<div class='jobContainer'>" .
+        "<div class='jobWrapper'>" .
+        "<a href='job.php?" . $job['id'] . "'>" .
+        "<div class='imageWrapper'>" .
+        "<img class='jobListingImage' src='" . $job['image'] . "' alt='" . $job['title'] . "'/>" .
+        "</div>" .
+        "</a>" .
+        "<a href='job.php?" . $job['id'] . "'>" .
+        "<div class='jobTitleButton'>" . $job['title'] . "</div>" .
+        "</a>" .
+        "</div>" .
+        "</div>");
+    }
+
+    //Skicka meddelande box, nästan samma kod osm ovan^
     echo("<div class='jobContainer'>" .
     "<div class='jobWrapper'>" .
-    "<a href='job.php?" . $job['id'] . "'>" .
+    "<a href='message.php'>" .
     "<div class='imageWrapper'>" .
-    "<img class='jobListingImage' src='" . $job['image'] . "' alt='" . $job['title'] . "'/>" .
+    "<img class='jobListingImage' src='content/bilder/meddelande.png' alt='meddelande'/>" .
     "</div>" .
     "</a>" .
-    "<a href='job.php?" . $job['id'] . "'>" .
-    "<div class='jobTitleButton'>" . $job['title'] . "</div>" .
+    "<a href='message.php'>" .
+    "<div class='jobTitleButton'>Frågor? Skicka meddelande!</div>" .
     "</a>" .
     "</div>" .
     "</div>");
 }
 
-//Skicka meddelande box, nästan samma kod osm ovan^
-echo("<div class='jobContainer'>" .
- "<div class='jobWrapper'>" .
- "<a href='message.php'>" .
- "<div class='imageWrapper'>" .
- "<img class='jobListingImage' src='content/bilder/meddelande.png' alt='meddelande'/>" .
- "</div>" .
- "</a>" .
- "<a href='message.php'>" .
- "<div class='jobTitleButton'>Frågor? Skicka meddelande!</div>" .
- "</a>" .
- "</div>" .
- "</div>");
+listJobs();
 ?>
 
         </section>
@@ -131,7 +126,7 @@ function getBlogPosts() {
 
 
 
-    require_once 'blogHandler.php';
+    require_once("blogHandler.php");
 
     $api = new BlogHandler();
 
