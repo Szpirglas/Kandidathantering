@@ -51,7 +51,7 @@ class BlogHandler {
 
     function getBlogPost($postId) {
 
-  
+
 
 
         $url = 'https://api.hubapi.com/content/api/v2/blog-posts/' . $postId . '?hapikey=' . getenv('HS_APIKEY');

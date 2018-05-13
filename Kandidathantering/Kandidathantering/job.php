@@ -1,56 +1,5 @@
 <?php
-
 session_start();
-
-     function sendQuery($query) {
-        
-        require_once 'dbConnection.php';
-        
-        $db = new dbConnection();
-        
-        $connect = $this->db->connect();
-
-        if ($connect->connect_error) {
-            echo "Connection failed: " . $con->connect_error;
-        }
-        
-        $result = $connect->query($query);
-        
-        $connect->close();
-        
-        return $result;
-    }
-    
-    function hasApplied($vid, $jobId)
-    {
-        $query = "SELECT * FROM JOBAPPLY WHERE USERID = " . $vid . " AND JOBPOSTID = " . $jobId;
-        
-        $result = $this->sendQuery($query);
-        
-        if ($result->num_rows > 0)
-        {
-            
-            return true;
-            
-        }
-        
-        else {
-            
-            return false;
-            
-        }
-        
-        function Apply($vid, $jobId)
-        {
-            $query = "INSERT INTO JOBAPPLY (USERID, JOBPOSTID, STATUS) VALUES (" . $vid . ", " . $jobId . ", 'Applied')";
-            
-            $this->sendQuery($query);
-        }
-        
-        
-    }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -62,18 +11,19 @@ and open the template in the editor.
 <html>
     <head>
         <title> <?php
-        $jobId = $_SERVER['QUERY_STRING'];
-        require_once("blogHandler.php");
-        $api = new BlogHandler();
-        $job = $api->getBlogPost($jobId);
+            $jobId = $_SERVER['QUERY_STRING'];
+            require_once("blogHandler.php");
+            $api = new BlogHandler();
+            $job = $api->getBlogPost($jobId);
 
-        echo $job['title'];
-        ?></title>
+            echo $job['title'];
+            ?></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
-    
+
     <body>
         <?php
         $jobId = $_SERVER['QUERY_STRING'];
@@ -90,25 +40,42 @@ and open the template in the editor.
         "<div class=''>" . $job['body'] . "</div>" .
         "</div>" .
         "</div>");
-        
-       
-       
-       
-       
-       if ($this->hasApplied($_SESSION['user']['vid'], $jobId))
-       {
-           echo '<button type="button" disabled>Sök detta jobb</button>';
-       }
-       
-       else {
-           
-           echo 'tada!';
-         
-               
-           
-       }
-       
+
+
+        require_once 'JobApply.php';
+
+
+
+
+        if (!isset($_SESSION['user'])) {
+            echo 'Du måste vara inloggad för att kunna söka tjänsten';
+        } elseif (hasApplied($_SESSION['user']['vid'], $jobId)) {
+
+            echo '<button type="button" disabled>Sök detta jobb</button>';
+        } else {
+
+            echo '<button type="button" id="jobApplyBtn">Sök detta jobb</button>';
+        }
         ?>
     </body>
 </html>
+
+<script>
+    $(document).ready(function () {
+        $('#jobApplyBtn').click(function () {
+
+            $.ajax({
+                type: "POST",
+                url: "JobApply.php",
+                data: {vid: <?php echo $_SESSION['user']['vid'] ?>,
+                    jobId: <?php echo $_SERVER['QUERY_STRING'] ?>}
+            }).done(function () {
+                
+            });
+
+        });
+    });
+
+
+</script>
 
