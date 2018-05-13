@@ -6,14 +6,6 @@
 /* Om användaren har en cookie lagrad på sin dator så omdirigeras hen automatiskt
  * till sidan för inloggade */
    
-
-if (isset($_COOKIE["loggedIn"]))
-{
-    header("Location: success.php");
-    
-}
-
-
 ?>
 <html>
     <head>
@@ -28,7 +20,7 @@ if (isset($_COOKIE["loggedIn"]))
          
                  E-mail: <br>
                  <input type="text" name="email"><br><br>
-                 Password: <br>
+                 Lösenord: <br>
                  <input type="password" name="password"><br><br>
             <input type="submit">
                 

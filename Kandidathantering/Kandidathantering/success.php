@@ -1,6 +1,4 @@
-<?php
-//Kontrollerar om det finns en cookie, annars skickas användaren tillbaka till login-sidan
-?>
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -10,6 +8,8 @@
     </head>
     <body>
         <?php
+        
+        
 //Presenterar för- och efternamn som hämtats från API'n och lagrats i cookien
 
         echo "<h1>Välkommen!</h1>";
