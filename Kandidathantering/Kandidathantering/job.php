@@ -1,4 +1,9 @@
 <?php
+if ($_SERVER['QUERY_STRING'] == NULL)
+{
+    header("Location: index.php");
+    
+}
 session_start();
 ?>
 
