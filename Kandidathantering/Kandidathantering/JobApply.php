@@ -6,7 +6,7 @@ if (isset($_POST['vid']) && isset($_POST['jobId']))
     
     echo 'Ansökan skickad!';
    
-    
+    session_start();
 }
 
 
@@ -49,10 +49,13 @@ function apply($vid, $jobId) {
     $query = "INSERT INTO JOBAPPLY (USERID, JOBPOSTID, STATUS) VALUES ($vid, $jobId, 'Applied')";
     
     require_once 'dbConnection.php';
+    require_once 'TaskHandler.php';
 
+    $taskHandler = new TaskHandler();
     $db = new dbConnection();
-    
     $connect = $db->connect();
+    
+    $applicantName = $_SESSION['user']['firstname'] . " " . $_SESSION['user']['lastname'];
 
     if ($connect->connect_error) {
         echo "Connection failed: " . $connect->connect_error;
@@ -60,6 +63,7 @@ function apply($vid, $jobId) {
 
      if ($connect->query($query) === true) {
          
+         $taskHandler->createTask($_POST['vid'], $_POST['jobId'], $applicantName);
          
          $connect->close();
          
