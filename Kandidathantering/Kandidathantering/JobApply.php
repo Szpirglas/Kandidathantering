@@ -46,6 +46,8 @@ function hasApplied($vid, $jobId) {
 
 function apply($vid, $jobId) {
     
+    session_start();
+    
     $query = "INSERT INTO JOBAPPLY (USERID, JOBPOSTID, STATUS) VALUES ($vid, $jobId, 'Applied')";
     
     require_once 'dbConnection.php';
@@ -63,7 +65,7 @@ function apply($vid, $jobId) {
 
      if ($connect->query($query) === true) {
          
-         $taskHandler->createTask($_POST[$vid], $_POST[$jobId], $applicantName);
+        $taskHandler->createTask($vid, $jobId, $applicantName);
          
          $connect->close();
          
