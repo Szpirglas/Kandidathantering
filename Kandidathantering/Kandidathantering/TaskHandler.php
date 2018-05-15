@@ -40,9 +40,7 @@ class TaskHandler {
                 'dealIds' => array(),
                 'ownerIds' => array()
             ),
-            'attachments' => array(
-                "id" => array()
-            ),
+
             'metadata' => array(
                 'body' => $taskBody,
                 'subject' => $taskSubject,
