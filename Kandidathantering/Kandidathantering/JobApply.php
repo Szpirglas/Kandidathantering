@@ -57,15 +57,20 @@ function apply($vid, $jobId) {
     $db = new dbConnection();
     $connect = $db->connect();
     
+    require_once("blogHandler.php");
+    $api = new BlogHandler();
+    $job = $api->getBlogPost($jobId);
+    
+    $jobName = $job['title'];
     $applicantName = $_SESSION['user']['firstname'] . " " . $_SESSION['user']['lastname'];
-
+    
     if ($connect->connect_error) {
         echo "Connection failed: " . $connect->connect_error;
     }
 
      if ($connect->query($query) === true) {
          
-        $taskHandler->createTask($vid, $jobId, $applicantName);
+        $taskHandler->createTask($vid, $jobName, $applicantName);
          
          $connect->close();
          

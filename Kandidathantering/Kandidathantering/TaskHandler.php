@@ -18,11 +18,11 @@ class TaskHandler {
         $this->hsConnect = new hsConnection();
     }
 
-    function createTask($vid, $jobId, $applicantName) {
+    function createTask($vid, $jobName, $applicantName) {
         
         
         
-        $taskBody = $applicantName . ' har sökt jobb: ' . $jobId;
+        $taskBody = $applicantName . ' har sökt jobb: ' . $jobName;
         $taskSubject = 'Jobbansökan: ' . $applicantName;
         
        
