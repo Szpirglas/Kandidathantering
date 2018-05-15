@@ -63,7 +63,7 @@ function apply($vid, $jobId) {
 
      if ($connect->query($query) === true) {
          
-         $taskHandler->createTask($_POST['vid'], $_POST['jobId'], $applicantName);
+         $taskHandler->createTask($_POST[$vid], $_POST[$jobId], $applicantName);
          
          $connect->close();
          

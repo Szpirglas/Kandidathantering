@@ -27,16 +27,16 @@ $task = array(
                 'type' => 'TASK',
                 'timestamp' => date("Y/m/d h:i:sa")
             ),
-//            'associations' => array(
-//                'contactIds' => array(),
-//                'companyIds' => array(),
-//                'dealIds' => array(),
-//                'ownerIds' => array()
-//
-//            ),
-//            'attachments' => array(
-//                "id" => array()
-//            ),
+            'associations' => array(
+                'contactIds' => array($vid),
+                'companyIds' => array(),
+                'dealIds' => array(),
+                'ownerIds' => array()
+
+            ),
+            'attachments' => array(
+                "id" => array()
+            ),
             'metadata' => array(
                 'body' => $applicantName . " " . 'har sökt jobb:' . " " . $jobId,
                 'subject' => 'Jobbansökan' . " " . $applicantName,
@@ -44,7 +44,9 @@ $task = array(
                 'forObjectType' => 'CONTACT'
             )
     );
-        
+      $fp = fopen('results.json', 'w');
+        fwrite($fp, json_encode($task));
+        fclose($fp);  
       $encode = json_encode($task);
       
       $url = 'https://api.hubapi.com/engagements/v1/engagements?hapikey=' . getenv('HS_APIKEY');
