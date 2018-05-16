@@ -58,10 +58,12 @@ function apply($vid, $jobId) {
     $connect = $db->connect();
     
     require_once("blogHandler.php");
+    
     $api = new BlogHandler();
     $job = $api->getBlogPost($jobId);
     
     $jobName = $job['title'];
+    
     $applicantName = $_SESSION['user']['firstname'] . " " . $_SESSION['user']['lastname'];
     
     if ($connect->connect_error) {
