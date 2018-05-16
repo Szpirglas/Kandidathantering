@@ -1,11 +1,9 @@
-<?php
-//Kontrollerar om det finns en cookie, annars skickas användaren tillbaka till login-sidan
-?>
+
 <html>
     <head>
         <meta charset="UTF-8">
 
-
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Arvo">
         <title></title>
     </head>
     <body>
@@ -21,10 +19,11 @@
         </br>
         <img class="strategBlack" src="content/bilder/Strateg_liggande-SVART_1.png" alt="strateg"/>
         <img class="strategWhite" src="content/bilder/Strateg_liggande-VIT_utan_text.png" alt="strateg"/>
-        </br
+        </br>
 
 
         <form action="updateprofileform.php">
+
             <input type="submit" value="Redigera profil" />
         </form>
         </br>        </br>
