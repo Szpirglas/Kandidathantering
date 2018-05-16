@@ -23,6 +23,12 @@ class ExceptionHandler {
         $connect = $this->dbConnect->connect();
         
         $time = date("Y-m-d H:i:s");
+        
+        if ($vid == null)
+        {
+            $vid = 0000;
+            
+        }
 
         $query = "INSERT INTO EXCEPTION (USERID, URL, EXMSG, DATE) VALUES ($vid, '$url', '$exception->getMessage()', $time)";
         

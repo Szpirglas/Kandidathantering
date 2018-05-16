@@ -57,9 +57,9 @@ if ($success == true) {
     
     $connect = new ProfileHandler();
     
-    $vid = $connect->getProfileId($email);
+    $profile = $connect->getProfileId($email);
     
-    setcookie("loggedIn", $vid);
+    setcookie("loggedIn", $profile['vid']);
     
 
     

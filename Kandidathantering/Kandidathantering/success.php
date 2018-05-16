@@ -30,6 +30,15 @@
         </form>
         </br>        </br>
 
+        <?php 
+        if (strlen($_SESSION['user']['cv']) < 5 || strlen($_SESSION['user']['personligt_brev']) < 5)
+        {
+        echo '<div id="cvWarning">GLÖM INTE ATT LÄGGA IN CV OCH PERSONLIGT BREV!</div>';
+            
+        echo '</br></br>';
+        }
+        ?>
+        
         <form action="logout.php">
             <input type="submit" value="Logga ut" />
         </form>

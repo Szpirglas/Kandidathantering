@@ -20,11 +20,13 @@ class ProfileHandler {
     function getProfileId($email) {
         $decoded = json_decode($this->hsConnect->getResponse('https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey=' . getenv('HS_APIKEY')));
 
-        $vid = array(
-            "vid" => $decoded->vid
+        $profile = array(
+            "vid" => $decoded->vid,
+            "firstname" => $decoded->firstname,
+            "lastname" => $decoded->lastname
         );
 
-        return $vid['vid'];
+        return $profile;
     }
 
     function getProfile($vid) {
@@ -91,16 +93,33 @@ class ProfileHandler {
         );
 
         $profileEncoded = json_encode($profile);
+        
+        $checkEmptyProfile = $this->getProfileId($email);
 
 //        Uppdaterar en profil om mailen redan finns tillaggd i HubSpot. Händer om användare skickat meddelande innan de registrerat sig. 
 //        Måste göras en koll för att se vilken av url:erna som ska användas.
-//        $url = 'https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey=' . getenv('HS_APIKEY');
-
-        $url = 'https://api.hubapi.com/contacts/v1/contact/?hapikey=' . getenv('HS_APIKEY');
-
+        
+        
+       $file = fopen("profile.txt", "w");
+       fwrite($file, $checkEmptyProfile['vid']);
+       fclose($file);
+               
+        
+        if ( $checkEmptyProfile['vid'] != NULL && $checkEmptyProfile['firstname'] == null && $checkEmptyProfile['lastname'] == NULL)
+        {
+            $url = 'https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey=' . getenv('HS_APIKEY');
+        }
+        
+        else
+        {
+            $url = 'https://api.hubapi.com/contacts/v1/contact/?hapikey=' . getenv('HS_APIKEY');
+        }
+        
         $this->hsConnect->sendToHubSpot($url, $profileEncoded);
     }
 
+    
+    
     function updateProfile($email, $firstname, $lastname, $interest) {
         $profile = array(
             'properties' => array(
