@@ -1,4 +1,9 @@
 <?php
+if ($_SERVER['QUERY_STRING'] == NULL)
+{
+    header("Location: index.php");
+    
+}
 session_start();
 ?>
 
@@ -46,18 +51,21 @@ and open the template in the editor.
         require_once 'JobApply.php';
 
 
-
+        echo '<div id="jobSearch">';
 
         if (!isset($_SESSION['user'])) {
             echo 'Du måste vara inloggad för att kunna söka tjänsten';
         } elseif (hasApplied($_SESSION['user']['vid'], $jobId)) {
 
-            echo '<button type="button" disabled>Sök detta jobb</button>';
+            echo "Du har redan sökt den här tjänsten!";
         } else {
 
             echo '<button type="button" id="jobApplyBtn">Sök detta jobb</button>';
         }
+        
+        echo '</div>'
         ?>
+        
     </body>
 </html>
 
@@ -71,6 +79,10 @@ and open the template in the editor.
                 data: {vid: <?php echo $_SESSION['user']['vid'] ?>,
                     jobId: <?php echo $_SERVER['QUERY_STRING'] ?>}
             }).done(function () {
+
+            
+            $('#jobSearch').html("Tack för din ansökan!"); 
+                
 
             });
 

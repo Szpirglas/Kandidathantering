@@ -18,13 +18,17 @@ class hsConnection {
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/json',
             'Content-Length: ' . strlen($json))
         );
 
-        curl_exec($ch);
+        $content = curl_exec($ch);
+        
+        $file = fopen("curl.txt", "w");
+        fwrite($file, $content);
+        fclose($file);
     }
 
     /**

@@ -3,12 +3,16 @@ if (!isset($_COOKIE["loggedIn"])) {
     
 } else {
 
-    require_once 'profileHandler.php';
+
+     require_once 'profileHandler.php';
+
 
     $connect = new ProfileHandler();
 
     $profile = $connect->getProfile($_COOKIE['loggedIn']);
+
     session_start();
+
 
     $_SESSION['user'] = $profile;
 }

@@ -6,7 +6,7 @@ if (isset($_POST['vid']) && isset($_POST['jobId']))
     
     echo 'Ansökan skickad!';
    
-    
+    session_start();
 }
 
 
@@ -46,20 +46,33 @@ function hasApplied($vid, $jobId) {
 
 function apply($vid, $jobId) {
     
+    session_start();
+    
     $query = "INSERT INTO JOBAPPLY (USERID, JOBPOSTID, STATUS) VALUES ($vid, $jobId, 'Applied')";
     
     require_once 'dbConnection.php';
+    require_once 'TaskHandler.php';
 
+    $taskHandler = new TaskHandler();
     $db = new dbConnection();
-    
     $connect = $db->connect();
-
+    
+    require_once("blogHandler.php");
+    
+    $api = new BlogHandler();
+    $job = $api->getBlogPost($jobId);
+    
+    $jobName = $job['title'];
+    
+    $applicantName = $_SESSION['user']['firstname'] . " " . $_SESSION['user']['lastname'];
+    
     if ($connect->connect_error) {
         echo "Connection failed: " . $connect->connect_error;
     }
 
      if ($connect->query($query) === true) {
          
+        $taskHandler->createTask($vid, $jobName, $applicantName);
          
          $connect->close();
          
