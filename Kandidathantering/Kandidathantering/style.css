@@ -3,7 +3,7 @@ body{
     /*padding-left: 20%;
     padding-right: 20%;*/
     margin: 0;
-    
+
 }
 
 body, input, a{
@@ -19,7 +19,10 @@ section{
     margin-bottom: 20px;
 }
 .blogPostContainer{
-
+    position: relative;
+margin: 0;
+margin: auto;
+width: 80%;
 }
 
 .blogPostTitle{
@@ -52,17 +55,27 @@ section{
 
 }
 
-.heroText{
+.heroTextBig{
     position: absolute;
     color: white;
     padding-left: 20%;
     padding-right: 20%;
 }
 
+.heroTextSmall{
+    display: none;
+}
+
+
 .workForUs{
-    padding-left: 20%;
-    width: 35%;
-    float: left;
+    position: relative;
+    padding-left: 10%;
+    width: 50%;
+    float:left;
+}
+
+.workForUs h1, .workForUs h3{
+    text-align: center;
 }
 
 .strategWhite{
@@ -70,6 +83,7 @@ section{
 }
 
 .profile{
+    position: relative;
     float: left;
     margin-left: 5%;
     width: 30%;
@@ -99,10 +113,11 @@ section{
 
 }
 
-.loginForm input:hover{
-    background-color: white;
+.loginForm input[type='text']:hover, .loginForm input[type='password']:hover{
+    background-color: white !important;
     color: black;
 }
+
 
 .loginForm a{
     color: black;
@@ -214,11 +229,11 @@ section{
 
 .latestBlogPost{
     float: left;
-    width: 55%;
+    width: 60%;
     background: whitesmoke;
-    padding-left: 20px;
-    padding-bottom: 10px;
-    padding-right: 10%;
+    padding: 20px;
+    /*    padding-bottom: 10px;*/
+    /*    padding-right: 20px;*/
 }
 
 /*.imageGalleryList{
@@ -269,9 +284,15 @@ section{
 
     }
 
+    .workForUs{
+        width: 80%;
+        padding-left: 0px;
+        margin-left: 10%;
+    }
+
     .profile{
         width: 100%;
-        float: none;
+        clear: both;
         background: black;
         color: white;
         margin-left: 0;
@@ -279,11 +300,8 @@ section{
         padding-top: 10px;
     }
 
-    .workForUs{
-        float: none;
-        width: 60%;
-        padding-right: 20%;
-    }
+
+
 
     .strategWhite{
         display: inline-block;
@@ -304,14 +322,14 @@ section{
         color: black;
         border: 2px solid white;
     }
-    .profile .loginForm input:hover{
-        background-color: transparent;
+    .profile .loginForm input[type='text']:hover, .profile .loginForm input[type='password']:hover{
+        background-color: black !important;
         color: white;
     }
-    
+
     .loginForm a{
-    color: white;
-}
+        color: white;
+    }
 
 }
 
@@ -325,6 +343,35 @@ section{
     .jobContainer{
         width: calc(100%/2);
 
+    }
+
+    .heroTextSmall{
+        display:block;
+        position: relative;
+        color: black;
+    }
+    .heroTextBig{
+        display:none;
+    }
+
+
+
+    .blog{
+        display: block; 
+    }
+    .viewBlog{
+
+        width: 100%;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+    .latestBlogPost{
+        display: block; 
+        width: 100%;
+        padding: 0px;
+    }
+    .blogPostContainer{
+        padding:20px;
     }
 }
 
@@ -382,11 +429,226 @@ section{
 }
 
 .messageContainer textArea{
-    min-width: 750px;
-    min-height: 600px;
+
+    /*    min-height: 400px;*/
 }
 
-.messageContainer .hbspt-form{
+.hs_message{
+/*    text-align: center !important;*/
+
+}
+
+.updateProfileFormContainer, .messageContainer, .regForm{
+    position: relative;
+
+    margin:auto;
+    max-width: 80%;
+    width: 500px;
+    padding-right: 7%;
+}
+
+.updateProfileFormContainer h1, .messageContainer h1, .regForm h1{
     text-align: center;
+}
+
+input[type="submit"]:hover, input[type="file"]:hover{
+    cursor: pointer !important;
+}
+::-webkit-file-upload-button { cursor:pointer; }
+/*body .hs-button.primary{
+    cursor: pointer;
+}*/
+
+.regForm{
+/*    position: relative;
+    margin:auto;
+    max-width: 80%;
+    width: 500px;*/
+    padding-right: 0%;
+    padding-top: 10%;
+}
+
+.regForm input{
+    border: 2px solid black;
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 10px;
+}
+
+.regForm input[type='submit']{
+    width: 524px;
+    margin-top: 20px;
+    background-color: white;
+    max-width: 107%;
 
 }
+
+.regForm input[type='submit']:hover{
+
+    background-color: black;
+    color: white;
+
+}
+
+.regForm h1{
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+/* All HubSpot Forms
+   ========================================================================== */
+.hbspt-form {
+    margin-top: 10%;
+    text-align: left;
+    color: black;
+    font-size: 1em;
+    font-family: 'Arvo';
+
+
+}
+
+/* Form Field (selector for form field wrapper) */
+.hs-form .hs-form-field{
+
+
+}
+
+/* Descriptions (targets class applied to Help Text divs) */
+.hs-form .hs-field-desc {}
+
+/* Labels (selects field labels and error messages) */
+.hs-form label {}
+.hs-form .hs-form-field > label {}
+
+/* Inputs (selectors for all inputs)  */
+.hs-form input[type="text"],
+.hs-form input[type="password"], 
+.hs-form input[type="datetime"], 
+.hs-form input[type="datetime-local"], 
+.hs-form input[type="date"], 
+.hs-form input[type="month"], 
+.hs-form input[type="time"], 
+.hs-form input[type="week"], 
+.hs-form input[type="number"], 
+.hs-form input[type="email"], 
+.hs-form input[type="url"], 
+.hs-form input[type="search"], 
+.hs-form input[type="tel"], 
+.hs-form input[type="color"],
+.hs-form input[type="file"],
+.hs-form textarea,
+.hs-form select {
+    outline: none;
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    border: 2px solid black;
+}
+
+/* Inputs in focus (selectors for all inputs when clicked)  */
+.hs-form input[type="text"]:focus,
+.hs-form input[type="password"]:focus, 
+.hs-form input[type="datetime"]:focus, 
+.hs-form input[type="datetime-local"]:focus, 
+.hs-form input[type="date"]:focus, 
+.hs-form input[type="month"]:focus, 
+.hs-form input[type="time"]:focus, 
+.hs-form input[type="week"]:focus, 
+.hs-form input[type="number"]:focus, 
+.hs-form input[type="email"]:focus, 
+.hs-form input[type="url"]:focus, 
+.hs-form input[type="search"]:focus, 
+.hs-form input[type="tel"]:focus, 
+.hs-form input[type="color"]:focus,
+.hs-form input[type="file"]:focus,
+.hs-form textarea:focus,
+.hs-form select:focus {}
+
+/* Multi-line inputs (selectors to target multi-line fields */
+.hs-form textarea {
+    min-height: 200px;
+}
+.hs-form textarea:focus {}
+
+/* Dropdowns (selectors for dropdowns) */
+.hs-form select {}
+.hs-form select:focus {}
+
+/* Multi-select (selectors for multi-select fields) */
+.hs-form form.hs-form .hs-form-field ul.inputs-list {}
+
+.hs-form form.hs-form .hs-form-field ul.inputs-list li input {}
+.hs-form input[type="radio"] {}
+.hs-form input[type="checkbox"] {}
+
+/* Required (selectors for fields, when they do not pass validation) */
+.hs-form input:focus:required:invalid, 
+.hs-form textarea:focus:required:invalid, 
+.hs-form select:focus:required:invalid {}
+
+.hs-form input:focus:required:invalid:focus, 
+.hs-form textarea:focus:required:invalid:focus, 
+.hs-form select:focus:required:invalid:focus {}
+
+/* Error message (selector for validation messages) */
+.hs-form .hs-error-msgs label{}
+
+/* Placeholder Text (styles the placeholder attribute text) */
+::-webkit-input-placeholder { /* Webkit Browsers */}
+:-moz-placeholder { /* Firefox 18- */}
+::-moz-placeholder { /* Firefox 19+ */}
+:-ms-input-placeholder { /* IE10 */}
+
+/* Multi Column Form (selectors for fieldsets and field wrappers) 
+   ========================================================================== */
+
+.hs-form .hs-form fieldset.form-columns-1 {}
+.hs-form .hs-form fieldset.form-columns-1 .hs-form-field {}
+
+.hs-form .hs-form fieldset.form-columns-2 {}
+.hs-form .hs-form fieldset.form-columns-2 .hs-form-field {}
+
+.hs-form .hs-form fieldset.form-columns-3 {}
+.hs-form .hs-form fieldset.form-columns-3 .hs-form-field {}
+
+/* Submit buttons (selectors for all non-CTA buttons) 
+   ========================================================================== */
+
+body .hs-button.primary,
+body .hbspt-form input[type="submit"],
+body .hbspt-form input[type="button"] {
+    position: relative;
+    background-color: white;
+    /*    cursor: pointer !important;*/
+
+    padding: 10px;
+    width: 524px;
+    max-width: 107%;
+    min-width: 100%;
+    border: 2px solid black;
+}
+
+body .messageContainer .hbspt-form input[type="submit"]{
+    width: 500px;
+    max-width: 100%;
+}
+
+body .hs-button.primary:hover,
+body .hbspt-form input[type="submit"]:hover,
+body .hbspt-form input[type="button"]:hover {
+    background-color: black;
+    color: white;
+}
+
+body .hs-button.primary:focus,
+body input[type="submit"]:focus,
+body input[type="button"]:focus {}

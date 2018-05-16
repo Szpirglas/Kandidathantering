@@ -12,29 +12,24 @@ require_once 'hsConnection.php';
 class ProfileHandler {
 
     protected $hsConnect;
-    
-    function __construct()
-    {
+
+    function __construct() {
         $this->hsConnect = new hsConnection();
-        
     }
-    
-    function getProfileId($email)
-    {
-           $decoded = json_decode($this->hsConnect->getResponse('https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey='.getenv('HS_APIKEY')));
-        
+
+    function getProfileId($email) {
+        $decoded = json_decode($this->hsConnect->getResponse('https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey=' . getenv('HS_APIKEY')));
+
         $vid = array(
             "vid" => $decoded->vid
         );
-        
+
         return $vid['vid'];
-        
-        
     }
-    
+
     function getProfile($vid) {
-        
-        
+
+
         $decoded = json_decode($this->hsConnect->getResponse('https://api.hubapi.com/contacts/v1/contact/vid/' . $vid . '/profile?hapikey=' . getenv('HS_APIKEY')));
 
 
@@ -42,7 +37,11 @@ class ProfileHandler {
             "firstname" => $decoded->properties->firstname->value,
             "lastname" => $decoded->properties->lastname->value,
             "email" => $decoded->properties->email->value,
-            "vid" => $vid);
+            "vid" => $vid,
+            "cv" => $decoded->properties->cv->value,
+            "area_of_interest" => $decoded->properties->area_of_interest->value,
+            "personligt_brev" => $decoded->properties->personligt_brev->value
+        );
 
 
 
@@ -76,17 +75,33 @@ class ProfileHandler {
                     'property' => 'lastname',
                     'value' => $lastname
                 ),
+                array(
+                    'property' => 'area_of_interest',
+                    'value' => 'Strateg'
+                ),
+                array(
+                    'property' => 'cv',
+                    'value' => ' '
+                ),
+                array(
+                    'property' => 'personligt_brev',
+                    'value' => ' '
+                ),
             )
         );
 
         $profileEncoded = json_encode($profile);
 
+//        Uppdaterar en profil om mailen redan finns tillaggd i HubSpot. Händer om användare skickat meddelande innan de registrerat sig. 
+//        Måste göras en koll för att se vilken av url:erna som ska användas.
+//        $url = 'https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey=' . getenv('HS_APIKEY');
+
         $url = 'https://api.hubapi.com/contacts/v1/contact/?hapikey=' . getenv('HS_APIKEY');
 
         $this->hsConnect->sendToHubSpot($url, $profileEncoded);
     }
-    
-     function updateProfile($email, $firstname, $lastname, $interest) {
+
+    function updateProfile($email, $firstname, $lastname, $interest) {
         $profile = array(
             'properties' => array(
                 array(
@@ -109,7 +124,7 @@ class ProfileHandler {
         $url = 'https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey=' . getenv('HS_APIKEY');
         $this->hsConnect->sendToHubSpot($url, $profileEncoded);
     }
-    
+
     function subscribeNewsletter($email, $frequency) {
         $decoded = json_decode($this->getResponse('https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey=' . getenv('HS_APIKEY')));
 
@@ -130,5 +145,4 @@ class ProfileHandler {
         $this->hsConnect->sendToHubSpot($url, $subscriptionEncoded);
     }
 
-   
 }
