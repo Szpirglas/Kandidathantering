@@ -56,8 +56,18 @@ class TaskHandler {
        fclose($fp);
 
         $url = 'https://api.hubapi.com/engagements/v1/engagements?hapikey=' . getenv('HS_APIKEY');
-
-        $this->hsConnect->sendToHubSpot($url, $encode);
+        
+        try{
+            $this->hsConnect->sendToHubSpot($url, $encode);
+        }
+        
+        catch (Exception $e)
+        {
+            require_once 'exceptionHandler.php';
+            
+            $exHandler = new ExceptionHandler();
+            $exHandler->addException($vid, $url, $e);            
+        }
     }
 
 }

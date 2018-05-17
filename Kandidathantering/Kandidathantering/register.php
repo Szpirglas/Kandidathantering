@@ -21,21 +21,26 @@ if (filter_var($regEmail, FILTER_VALIDATE_EMAIL) AND
     //Uppkoppling och insert i databasen
 
     require_once("dbConnection.php");
+    
     $db = new dbConnection();
-    $con = $db->connect();
+    
+     try {
+            $con = $db->connect();
+        } catch (Exception $e) {
+            require_once 'exceptionHandler.php';
 
-    if ($con->connect_error) {
-        echo "Connection failed: " . $con->connect_error;
-    }
+            $exHandler = new ExceptionHandler();
+            $exHandler->addException($vid, $url, $e);
+        }
 
     $checkReg = "SELECT * FROM user where email = '$regEmail'";
     $sql = "INSERT INTO USER (EMAIL, PASSWORD) values ('$regEmail', '$regPassword')";
 
     $checkResponse = $con->query($checkReg);
 
+    
+    
     if ($checkResponse->num_rows == 0) {
-
-
 
         if ($con->query($sql) === true) {
 

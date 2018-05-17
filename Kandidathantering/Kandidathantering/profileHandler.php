@@ -18,7 +18,17 @@ class ProfileHandler {
     }
 
     function getProfileId($email) {
-        $decoded = json_decode($this->hsConnect->getResponse('https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey=' . getenv('HS_APIKEY')));
+
+        $url = 'https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey=' . getenv('HS_APIKEY');
+
+        try {
+            $decoded = json_decode($this->hsConnect->getResponse($url));
+        } catch (Exception $e) {
+            require_once 'exceptionHandler.php';
+
+            $exHandler = new ExceptionHandler();
+            $exHandler->addException($vid, $url, $e);
+        }
 
         $profile = array(
             "vid" => $decoded->vid,
@@ -31,9 +41,16 @@ class ProfileHandler {
 
     function getProfile($vid) {
 
+        $url = 'https://api.hubapi.com/contacts/v1/contact/vid/' . $vid . '/profile?hapikey=' . getenv('HS_APIKEY');
 
-        $decoded = json_decode($this->hsConnect->getResponse('https://api.hubapi.com/contacts/v1/contact/vid/' . $vid . '/profile?hapikey=' . getenv('HS_APIKEY')));
+        try {
+            $decoded = json_decode($this->hsConnect->getResponse($url));
+        } catch (Exception $e) {
+            require_once 'exceptionHandler.php';
 
+            $exHandler = new ExceptionHandler();
+            $exHandler->addException($vid, $url, $e);
+        }
 
         $profile = array(
             "firstname" => $decoded->properties->firstname->value,
@@ -93,33 +110,31 @@ class ProfileHandler {
         );
 
         $profileEncoded = json_encode($profile);
-        
+
         $checkEmptyProfile = $this->getProfileId($email);
 
 //        Uppdaterar en profil om mailen redan finns tillaggd i HubSpot. Händer om användare skickat meddelande innan de registrerat sig. 
 //        Måste göras en koll för att se vilken av url:erna som ska användas.
-        
-        
-       $file = fopen("profile.txt", "w");
-       fwrite($file, $checkEmptyProfile['vid']);
-       fclose($file);
-               
-        
-        if ( $checkEmptyProfile['vid'] != NULL && $checkEmptyProfile['firstname'] == null && $checkEmptyProfile['lastname'] == NULL)
-        {
+
+
+
+
+        if ($checkEmptyProfile['vid'] != NULL && $checkEmptyProfile['firstname'] == null && $checkEmptyProfile['lastname'] == NULL) {
             $url = 'https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey=' . getenv('HS_APIKEY');
-        }
-        
-        else
-        {
+        } else {
             $url = 'https://api.hubapi.com/contacts/v1/contact/?hapikey=' . getenv('HS_APIKEY');
         }
-        
-        $this->hsConnect->sendToHubSpot($url, $profileEncoded);
+
+        try {
+            $this->hsConnect->sendToHubSpot($url, $profileEncoded);
+        } catch (Exception $e) {
+            require_once 'exceptionHandler.php';
+
+            $exHandler = new ExceptionHandler();
+            $exHandler->addException($vid, $url, $e);
+        }
     }
 
-    
-    
     function updateProfile($email, $firstname, $lastname, $interest) {
         $profile = array(
             'properties' => array(
@@ -141,7 +156,15 @@ class ProfileHandler {
         $profileEncoded = json_encode($profile);
 
         $url = 'https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey=' . getenv('HS_APIKEY');
-        $this->hsConnect->sendToHubSpot($url, $profileEncoded);
+
+        try {
+            $this->hsConnect->sendToHubSpot($url, $profileEncoded);
+        } catch (Exception $e) {
+            require_once 'exceptionHandler.php';
+
+            $exHandler = new ExceptionHandler();
+            $exHandler->addException($vid, $url, $e);
+        }
     }
 
     function subscribeNewsletter($email, $frequency) {
@@ -161,7 +184,15 @@ class ProfileHandler {
         $subscriptionEncoded = json_encode($subcription);
         $url = 'https://api.hubapi.com/contacts/v1/contact/vid/' . $vid . '/profile?hapikey=' . getenv('HS_APIKEY');
 
-        $this->hsConnect->sendToHubSpot($url, $subscriptionEncoded);
+
+        try {
+            $this->hsConnect->sendToHubSpot($url, $subscriptionEncoded);
+        } catch (Exception $e) {
+            require_once 'exceptionHandler.php';
+
+            $exHandler = new ExceptionHandler();
+            $exHandler->addException($vid, $url, $e);
+        }
     }
 
 }
