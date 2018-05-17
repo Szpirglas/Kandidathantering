@@ -1,10 +1,15 @@
 <?php
 if (!isset($_COOKIE["loggedIn"])) {
-    
+    session_start();
+    $_SESSION['user'] = array();
+    $_SESSION['errors'] = array();
+    if (empty($_SESSION['loginError'])) {
+        $_SESSION['loginError'] = "";
+    }
 } else {
 
 
-     require_once 'profileHandler.php';
+    require_once 'profileHandler.php';
 
 
     $connect = new ProfileHandler();
@@ -96,13 +101,12 @@ if (!isset($_COOKIE["loggedIn"])) {
                     "</div>" .
                     "</a>" .
                     "<a href='job.php?" . $job['id'] . "'>" .
-                    "<div class='jobTitleButton'>" . $job['title'] . "</div>" .
+                    "<div class='jobTitleButton button button-white'>" . $job['title'] . "</div>" .
                     "</a>" .
                     "</div>" .
                     "</div>");
                 }
 
-                //Skicka meddelande box, nästan samma kod osm ovan^
                 echo("<div class='jobContainer'>" .
                 "<div class='jobWrapper'>" .
                 "<a href='message.php'>" .
@@ -111,7 +115,7 @@ if (!isset($_COOKIE["loggedIn"])) {
                 "</div>" .
                 "</a>" .
                 "<a href='message.php'>" .
-                "<div class='jobTitleButton'>Frågor? Skicka meddelande!</div>" .
+                "<div class='jobTitleButton button button-white'>Frågor? Skicka meddelande!</div>" .
                 "</a>" .
                 "</div>" .
                 "</div>");
@@ -123,7 +127,7 @@ if (!isset($_COOKIE["loggedIn"])) {
         </section>
 
         <section class="blog">
-            
+
             <div class="latestBlogPost">
                 <?php
 
@@ -157,72 +161,45 @@ if (!isset($_COOKIE["loggedIn"])) {
                 ?>
             </div>
             <div class="viewBlog">
-  
-
                 <form class="viewBlogBtn" action="Blog.php">
-                    <input type="submit" value="Se hela bloggen" />
+                    <input class="button button-black" type="submit" value="Se hela bloggen" />
                 </form>
-
-
-
             </div>
         </section>
 
         <section class="imageGallery">
-
-
-
-
             <img src="content/ord/fotboll.png"/>
-
             <video autoplay muted loop poster="content/bilder/fikabord.png">
                 <source src="content/videos/trappa.mp4" type="video/mp4">
             </video>
-
             <img src="content/ord/friskvård.png"/>
             <img src="content/bilder/reception.jpg"/>
             <img src="content/ord/fika.png"/>
             <img src="content/bilder/trappa.jpg"/>                    
-<!--                    <img src="content/bilder/hus.jpg"/>-->
             <img src="content/ord/flamingo.png"/>
-<!--                    <img src="content/bilder/fikabord.png"/>-->
             <img src="content/bilder/glad.jpg"/>
             <img src="content/ord/hus.png"/>
-
             <video autoplay muted loop poster="content/bilder/kaffe.jpg">
                 <source src="content/videos/filma.mp4" type="video/mp4">
             </video>
-
             <img src="content/ord/skratt.png"/>
             <img src="content/bilder/glass.jpg"/>
             <img src="content/ord/godis.png"/>
-<!--                    <img src="content/bilder/kaffe.jpg"/>-->
-
             <video autoplay muted loop poster="content/bilder/hus.jpg">
                 <source src="content/videos/rita.mp4" type="video/mp4">
             </video>
-
             <img src="content/ord/hackaton.png"/>
             <img class="hideIf2000pxOrMore" src="content/bilder/skratt.jpg"/>
-
-
             <img class="hideIf2000pxOrMore" src="content/ord/läge.png"/>
             <video class="hideIf2000pxOrMore" autoplay muted loop>
                 <source src="content/videos/megaman.mp4" type="video/mp4">
             </video>
-<!--                    <img src="content/ord/code.png"/>-->
-
-            <!--                    <video autoplay muted loop>
-                                    <source src="content/videos/roligt.mp4" type="video/mp4">
-                                </video>-->
-
-            <!--                    <video autoplay muted loop>
-                                    <source src="content/videos/lava.mp4" type="video/mp4">
-                                </video>-->
         </section>
-
-
     </body>
-
 </html>
 
+<?php
+if (!isset($_COOKIE["loggedIn"])) {
+    $_SESSION['loginError'] = "";
+}
+?>

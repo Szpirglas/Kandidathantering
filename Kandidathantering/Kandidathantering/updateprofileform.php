@@ -1,16 +1,15 @@
 <?php
-     require_once 'profileHandler.php';
+require_once 'profileHandler.php';
 
 
-    $connect = new ProfileHandler();
+$connect = new ProfileHandler();
 
-    $profile = $connect->getProfile($_COOKIE['loggedIn']);
+$profile = $connect->getProfile($_COOKIE['loggedIn']);
 
-    session_start();
+session_start();
 
 
-    $_SESSION['user'] = $profile;
-
+$_SESSION['user'] = $profile;
 ?>
 
 
@@ -27,10 +26,15 @@
         crossorigin="anonymous"></script>
     </head>
     <body>
+        <div class="navHeader">
+            <a href="index.php">
+                <img class="navImg" src="content/bilder/Strateg_liggande-SVART_1.png" alt="index"/>
+            </a>
+        </div>
         <!--[if lte IE 8]>
 <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
 <![endif]-->
-        <section class="updateProfileFormContainer">
+        <section class="updateProfileFormContainer hsFormContainer">
             <h1>Uppdatera profil</h1>
             <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
             <script>
@@ -52,7 +56,7 @@
 
                         $('input[value="Strateg"]').prop('checked', true).change();
                         $('input[value="Strateg"]').closest('li').hide();
-                        
+
 
                         if (area_of_interest.includes("Marknadsforing")) {
                             $('input[value="Marknadsforing"]').prop('checked', true).change();
@@ -63,7 +67,7 @@
                         if (area_of_interest.includes("GrafiskDesign")) {
                             $('input[value="GrafiskDesign"]').prop('checked', true).change();
                         }
-                        
+
 
                         if (cv != " ") {
                             $('.hs-fieldtype-file').find("legend").html("<a href=" + cv + ">Se uppladdat CV.</a><p>Ladda upp ett nytt CV om du önskar ersätta det gamla</p>").change();
@@ -72,7 +76,7 @@
                         }
 
 
-                        $('textarea[name="personligt_brev"]').val(personligt_brev).change();                    
+                        $('textarea[name="personligt_brev"]').val(personligt_brev).change();
                     },
 
                     onFormSubmit: function ($form) {

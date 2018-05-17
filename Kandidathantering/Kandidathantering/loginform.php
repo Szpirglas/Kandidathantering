@@ -14,16 +14,17 @@
     </head>
     <body>
         <h1>LOGGA IN</h1>
-        <br>
-        <br>
+
 
         <div class="loginForm"><form action="login.php" method="post">
-
+                <?php
+                    echo '<p class="errors">' . $_SESSION['loginError'] . '</p>';
+                ?>
                 E-mail: <br>
                 <input type="text" name="email"><br><br>
                 Lösenord: <br>
                 <input type="password" name="password"><br><br>
-                <input type="submit" value="Logga in">
+                <input class="button button-black" type="submit" value="Logga in">
 
                 <br>
                 <br>

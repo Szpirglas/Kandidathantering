@@ -14,13 +14,13 @@ and open the template in the editor.
 <html>
     <head>
         <title> <?php
-$jobId = $_SERVER['QUERY_STRING'];
-require_once("blogHandler.php");
-$api = new BlogHandler();
-$job = $api->getBlogPost($jobId);
+            $jobId = $_SERVER['QUERY_STRING'];
+            require_once("blogHandler.php");
+            $api = new BlogHandler();
+            $job = $api->getBlogPost($jobId);
 
-echo $job['title'];
-?></title>
+            echo $job['title'];
+            ?></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="style.css">
@@ -29,40 +29,45 @@ echo $job['title'];
     </head>
 
     <body>
-<?php
-$jobId = $_SERVER['QUERY_STRING'];
-require_once("blogHandler.php");
-$api = new BlogHandler();
-$job = $api->getBlogPost($jobId);
+        <div class="navHeader">
+            <a href="index.php">
+                <img class="navImg" src="content/bilder/Strateg_liggande-SVART_1.png" alt="index"/>
+            </a>
+        </div>
+        <?php
+        $jobId = $_SERVER['QUERY_STRING'];
+        require_once("blogHandler.php");
+        $api = new BlogHandler();
+        $job = $api->getBlogPost($jobId);
 
-echo("<div class='jobPostContainer'>" .
- "<div class='jobPostImageWrapper'>" .
- "<img class='jobPostImage' src='" . $job['image'] . "' alt='" . $job['title'] . "'/>" .
- "</div>" .
- "<div class='jobPostText'>" .
- "<div class=''><h1>" . $job['title'] . "</h1></div>" .
- "<div class=''>" . $job['body'] . "</div>" .
- "</div>" .
- "</div>");
+        echo("<div class='jobPostContainer'>" .
+        "<div class='jobPostImageWrapper'>" .
+        "<img class='jobPostImage' src='" . $job['image'] . "' alt='" . $job['title'] . "'/>" .
+        "</div>" .
+        "<div class='jobPostText'>" .
+        "<div class=''><h1>" . $job['title'] . "</h1></div>" .
+        "<div class=''>" . $job['body'] . "</div>" .
+        "</div>" .
+        "</div>");
 
 
-require_once 'JobApply.php';
+        require_once 'JobApply.php';
 
 
-echo '<div id="jobSearch">';
+        echo '<div id="jobSearch">';
 
-if (!isset($_SESSION['user'])) {
-    echo 'Du måste vara inloggad för att kunna söka tjänsten';
-} elseif (hasApplied($_SESSION['user']['vid'], $jobId)) {
+        if (!isset($_SESSION['user']['vid'])) {
+            echo 'Du måste vara inloggad för att kunna söka tjänsten';
+        } elseif (hasApplied($_SESSION['user']['vid'], $jobId)) {
 
-    echo "Du har redan sökt den här tjänsten!";
-} else {
+            echo "Du har redan sökt den här tjänsten!";
+        } else {
 
-    echo '<button type="button" id="jobApplyBtn">Sök detta jobb</button>';
-}
+            echo '<button type="button" id="jobApplyBtn" class="button button-white">Sök detta jobb</button>';
+        }
 
-echo '</div>'
-?>
+        echo '</div>'
+        ?>
 
     </body>
 </html>
