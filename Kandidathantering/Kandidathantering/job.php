@@ -1,5 +1,5 @@
 <?php
-if ($_SERVER['QUERY_STRING'] == NULL) {
+if (!isset($_SERVER['QUERY_STRING'])) {
     header("Location: index.php");
 }
 session_start();

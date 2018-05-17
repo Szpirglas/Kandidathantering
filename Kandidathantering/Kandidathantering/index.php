@@ -102,7 +102,7 @@ if (!isset($_COOKIE["loggedIn"])) {
                     "</div>");
                 }
 
-                //Skicka meddelande box, nästan samma kod osm ovan^
+                //Skicka meddelande box, nästan samma kod som ovan^
                 echo("<div class='jobContainer'>" .
                 "<div class='jobWrapper'>" .
                 "<a href='message.php'>" .

@@ -15,12 +15,15 @@ if ($email != null AND $password != null) {
         require_once("dbConnection.php");
         $db = new dbConnection();
 
-        if ($con->connect_error) {
-            throw new Exception("Connection failed: " . $con->connect_error);
-        }
+       
 
         try {
             $con = $db->connect();
+            
+             if ($con->connect_error) {
+            throw new Exception("Connection failed: " . $con->connect_error);
+        }
+        
         } catch (Exception $e) {
             require_once 'exceptionHandler.php';
 

@@ -2,8 +2,6 @@
 
 if (isset($_POST['vid']) && isset($_POST['jobId'])) {
     apply($_POST['vid'], $_POST['jobId']);
-
-   
 }
 
 function sendQuery($query) {
@@ -12,15 +10,23 @@ function sendQuery($query) {
 
     $db = new dbConnection();
 
-    $connect = $db->connect();
+         try {
+            $con = $db->connect();
+            
+             if ($con->connect_error) {
+            throw new Exception("Connection failed: " . $con->connect_error);
+        }
+        
+        } catch (Exception $e) {
+            require_once 'exceptionHandler.php';
 
-    if ($connect->connect_error) {
-        echo "Connection failed: " . $connect->connect_error;
-    }
+            $exHandler = new ExceptionHandler();
+            $exHandler->addException($vid, $url, $e);
+        }
 
-    $result = $connect->query($query);
+    $result = $con->query($query);
 
-    $connect->close();
+    $con->close();
 
 
     return $result;
@@ -29,8 +35,14 @@ function sendQuery($query) {
 function hasApplied($vid, $jobId) {
     $query = "SELECT * FROM JOBAPPLY WHERE USERID = " . $vid . " AND JOBPOSTID = " . $jobId;
 
-    $result = sendQuery($query);
+    try {
+        $result = sendQuery($query);
+    } catch (Exception $e) {
+        require_once 'exceptionHandler.php';
 
+        $exHandler = new ExceptionHandler();
+        $exHandler->addException($vid, $url, $e);
+    }
     if ($result->num_rows > 0) {
 
         return true;
@@ -46,14 +58,12 @@ function apply($vid, $jobId) {
 
     $query = "INSERT INTO JOBAPPLY (USERID, JOBPOSTID, STATUS) VALUES ($vid, $jobId, 'Applied')";
 
-    require_once 'dbConnection.php';
+    require_once 'blogHandler.php';
     require_once 'TaskHandler.php';
 
     $taskHandler = new TaskHandler();
-    $db = new dbConnection();
-    $connect = $db->connect();
 
-    require_once("blogHandler.php");
+
 
     $api = new BlogHandler();
     $job = $api->getBlogPost($jobId);
@@ -62,28 +72,19 @@ function apply($vid, $jobId) {
 
     $applicantName = $_SESSION['user']['firstname'] . " " . $_SESSION['user']['lastname'];
 
-    if ($connect->connect_error) {
-        echo "Connection failed: " . $connect->connect_error;
+    try {
+        $result = sendQuery($query);
+    } catch (Exception $e) {
+        require_once 'exceptionHandler.php';
+
+        $exHandler = new ExceptionHandler();
+        $exHandler->addException($vid, $url, $e);
     }
 
-    if ($connect->query($query) === true) {
+    if ($result === true) {
 
         $taskHandler->createTask($vid, $jobName, $applicantName);
-
-        $connect->close();
-
-     
     } 
-    
-    
-    else {
-        echo "Error: " . $query . "<br>" . $connect->error;
-
-        $connect->close();
-    }
-    
-    
 }
-
 ?>
 

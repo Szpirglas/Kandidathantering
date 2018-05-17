@@ -51,9 +51,6 @@ class TaskHandler {
 
         $encode = json_encode($task, JSON_NUMERIC_CHECK);
 
-        $fp = fopen('results.json', 'w');
-       fwrite($fp, $encode);
-       fclose($fp);
 
         $url = 'https://api.hubapi.com/engagements/v1/engagements?hapikey=' . getenv('HS_APIKEY');
         

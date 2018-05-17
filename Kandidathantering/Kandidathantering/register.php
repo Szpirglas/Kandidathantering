@@ -24,15 +24,19 @@ if (filter_var($regEmail, FILTER_VALIDATE_EMAIL) AND
     
     $db = new dbConnection();
     
-     try {
+      try {
             $con = $db->connect();
+            
+             if ($con->connect_error) {
+            throw new Exception("Connection failed: " . $con->connect_error);
+        }
+        
         } catch (Exception $e) {
             require_once 'exceptionHandler.php';
 
             $exHandler = new ExceptionHandler();
             $exHandler->addException($vid, $url, $e);
         }
-
     $checkReg = "SELECT * FROM user where email = '$regEmail'";
     $sql = "INSERT INTO USER (EMAIL, PASSWORD) values ('$regEmail', '$regPassword')";
 
