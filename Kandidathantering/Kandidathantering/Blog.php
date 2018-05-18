@@ -2,12 +2,19 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Strateg - Blogg</title>
+        <link rel='shortcut icon' type='image/x-icon' href='content/favicon.ico' />
         <link rel="stylesheet" type="text/css" href="style.css">
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Arvo">
     </head>
     <body>
+        <div class="navHeader">
+            <a href="index.php">
+                <img class="navImg" src="content/bilder/Strateg_liggande-SVART_1.png" alt="index"/>
+            </a>
+        </div>
         <?php
-
+        //Hämta och visa alla blogginlogg från HR-bloggen
         function getBlogPosts() {
             require_once("blogHandler.php");
 

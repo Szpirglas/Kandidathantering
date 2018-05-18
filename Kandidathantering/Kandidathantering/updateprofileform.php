@@ -1,24 +1,19 @@
 <?php
-     require_once 'profileHandler.php';
-
-
-    $connect = new ProfileHandler();
-
-    $profile = $connect->getProfile($_COOKIE['loggedIn']);
-
-    session_start();
-
-
-    $_SESSION['user'] = $profile;
-
+//Uppdatera användasession
+require_once 'profileHandler.php';
+$connect = new ProfileHandler();
+$profile = $connect->getProfile($_COOKIE['loggedIn']);
+session_start();
+$_SESSION['user'] = $profile;
 ?>
 
 
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Strateg - Uppdatera</title>
+        <link rel='shortcut icon' type='image/x-icon' href='content/favicon.ico' />
         <meta charset="UTF-8">
-        <title></title>
         <link rel="stylesheet" type="text/css" href="style.css">
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Arvo">
         <script
@@ -27,10 +22,15 @@
         crossorigin="anonymous"></script>
     </head>
     <body>
+        <div class="navHeader">
+            <a href="index.php">
+                <img class="navImg" src="content/bilder/Strateg_liggande-SVART_1.png" alt="index"/>
+            </a>
+        </div>
         <!--[if lte IE 8]>
 <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
 <![endif]-->
-        <section class="updateProfileFormContainer">
+        <section class="updateProfileFormContainer hsFormContainer">
             <h1>Uppdatera profil</h1>
             <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
             <script>
@@ -45,6 +45,7 @@
                     portalId: "2896922",
                     formId: "479de400-f121-410c-8e10-fd2f4ba968a6",
                     css: "",
+//                    Fyll i fält med sparade uppgifter
                     onFormReady: function ($form) {
                         $('input[name="firstname"]').val(firstname).change();
                         $('input[name="lastname"]').val(lastname).change();
@@ -52,7 +53,7 @@
 
                         $('input[value="Strateg"]').prop('checked', true).change();
                         $('input[value="Strateg"]').closest('li').hide();
-                        
+
 
                         if (area_of_interest.includes("Marknadsforing")) {
                             $('input[value="Marknadsforing"]').prop('checked', true).change();
@@ -63,7 +64,7 @@
                         if (area_of_interest.includes("GrafiskDesign")) {
                             $('input[value="GrafiskDesign"]').prop('checked', true).change();
                         }
-                        
+
 
                         if (cv != " ") {
                             $('.hs-fieldtype-file').find("legend").html("<a href=" + cv + ">Se uppladdat CV.</a><p>Ladda upp ett nytt CV om du önskar ersätta det gamla</p>").change();
@@ -72,7 +73,7 @@
                         }
 
 
-                        $('textarea[name="personligt_brev"]').val(personligt_brev).change();                    
+                        $('textarea[name="personligt_brev"]').val(personligt_brev).change();
                     },
 
                     onFormSubmit: function ($form) {
