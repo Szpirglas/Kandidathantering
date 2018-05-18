@@ -19,16 +19,16 @@
 
         <!--        <br>  <a href="logout.php">Log out!</a> <br>-->
         </br>
-        <img class="strategBlack" src="content/bilder/Strateg_liggande-SVART_1.png" alt="strateg"/>
+<!--        <img class="strategBlack" src="content/bilder/Strateg_liggande-SVART_1.png" alt="strateg"/>-->
         <img class="strategWhite" src="content/bilder/Strateg_liggande-VIT_utan_text.png" alt="strateg"/>
         </br>
 
 
         <form action="updateprofileform.php">
 
-            <input type="submit" value="Redigera profil" />
+            <input class="button button-black" type="submit" value="Redigera profil" />
         </form>
-        </br>        </br>
+        </br>
 
         <?php 
         if (strlen($_SESSION['user']['cv']) < 5 || strlen($_SESSION['user']['personligt_brev']) < 5)
@@ -40,7 +40,7 @@
         ?>
         
         <form action="logout.php">
-            <input type="submit" value="Logga ut" />
+            <input class="button button-black" type="submit" value="Logga ut" />
         </form>
 
 
