@@ -9,6 +9,12 @@ $dotenv->load();
 
 require_once 'hsConnection.php';
 
+/**
+ * Klass med två funktioner som används för att hämta en utvald blogg med alla inlägg, samt hämta
+ * specifika inlägg ur en utvald blogg.
+ * 
+ */
+
 class BlogHandler {
 
     protected $hsConnect;
