@@ -7,8 +7,8 @@ $password = filter_input(INPUT_POST, 'password');
 $success = false;
 
 //Validering så att variablerna innehåller något
-if ($email != null AND $password != null) {
-    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
 
         //Här kopplar koden upp sig mot databasen för att kontrollera så användaren finns
@@ -32,7 +32,11 @@ if ($email != null AND $password != null) {
         }
 
 
-        $sql = "SELECT EMAIL FROM USER WHERE EMAIL LIKE '" . $email . "' AND PASSWORD LIKE '" . $password . "'";
+    if ($con->connect_error) {
+        echo "Connection failed: " . $con->connect_error;
+    }
+
+    $sql = "SELECT EMAIL FROM USER WHERE EMAIL LIKE '" . $email . "' AND PASSWORD LIKE '" . $password . "'";
 
 
         $result = $con->query($sql);
@@ -44,15 +48,23 @@ if ($email != null AND $password != null) {
             $success = true;
         } else {
 
-            $rows = $result->num_rows;
-            $success = false;
-        }
 
 
 
-        $con->close();
+
+    if ($result->num_rows == 1) {
+        $success = true;
+    } else {
+
+        $rows = $result->num_rows;
+        $success = false;
     }
+
+
+
+    $con->close();
 }
+
 
 
 /* Anledningen till att if/else-satsen ovan använder sig av en bool istället för att
@@ -67,10 +79,12 @@ if ($success == true) {
 
     $connect = new ProfileHandler();
 
+
     try {
         $profile = $connect->getProfileId($email);
     } catch (Exception $e) {
         require_once 'exceptionHandler.php';
+
 
         $exHandler = new ExceptionHandler();
         $exHandler->addException($vid, $url, $e);
@@ -80,9 +94,11 @@ if ($success == true) {
     setcookie("loggedIn", $profile['vid']);
 
 
-
     header('Location: index.php');
 } else {
     header('Location: index.php');
+    session_start();
+    $_SESSION['loginError'] = "Felaktig email eller lösenord.";
+
 }
 ?>

@@ -16,7 +16,12 @@ if (!isset($_COOKIE["loggedIn"])) {
         crossorigin="anonymous"></script>
     </head>
     <body>
-        <div class="messageContainer">
+        <div class="navHeader">
+            <a href="index.php">
+                <img class="navImg" src="content/bilder/Strateg_liggande-SVART_1.png" alt="index"/>
+            </a>
+        </div>
+        <div class="messageContainer hsFormContainer">
             <h1>Skicka ett meddelande</h1>
             <!--[if lte IE 8]>
       <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
