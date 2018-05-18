@@ -81,7 +81,6 @@ if (!isset($_COOKIE["loggedIn"])) {
 
             <?php
 
-            function listJobs() {
                 require_once("blogHandler.php");
 
                 $api = new BlogHandler();
@@ -119,9 +118,8 @@ if (!isset($_COOKIE["loggedIn"])) {
                 "</a>" .
                 "</div>" .
                 "</div>");
-            }
+            
 
-            listJobs();
             ?>
 
         </section>

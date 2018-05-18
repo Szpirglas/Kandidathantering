@@ -24,11 +24,14 @@ class hsConnection {
             'Content-Length: ' . strlen($json))
         );
 
-        $content = curl_exec($ch);
+        curl_exec($ch);
         
-        $file = fopen("curl.txt", "w");
-        fwrite($file, $content);
-        fclose($file);
+        if (curl_errno($ch)){
+            throw new Exception("cURL POST ERROR: " . curl_errno($ch));
+        }
+        
+        curl_close($ch);
+        
     }
 
     /**
@@ -43,8 +46,13 @@ class hsConnection {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_URL, $url);
         $result = curl_exec($ch);
+        
+        
+         if (curl_errno($ch)){
+            throw new Exception("cURL POST ERROR: " . curl_errno($ch));
+        }
+        
         curl_close($ch);
-
         return $result;
     }
 }

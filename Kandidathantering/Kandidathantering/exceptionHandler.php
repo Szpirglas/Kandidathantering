@@ -24,10 +24,14 @@ class ExceptionHandler {
         
         $time = date("Y-m-d H:i:s");
         
-        if ($vid == null)
+        if (!isset($vid))
         {
             $vid = 0000;
             
+        }
+        
+        if (!isset($url)){
+            $url = 'NO URL';
         }
 
         $query = "INSERT INTO EXCEPTION (USERID, URL, EXMSG, DATE) VALUES ($vid, '$url', '$exception->getMessage()', $time)";

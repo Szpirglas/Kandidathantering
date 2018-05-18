@@ -23,8 +23,19 @@ class BlogHandler {
 
 
         $url = 'https://api.hubapi.com/content/api/v2/blog-posts?hapikey=' . getenv('HS_APIKEY') . '&content_group_id=' . $blogId;
-
+        
+        try
+        {
         $decoded = json_decode($this->hsConnect->getResponse($url));
+        }
+          
+        catch (Exception $e)
+        {
+            require_once 'exceptionHandler.php';
+            
+            $exHandler = new ExceptionHandler();
+            $exHandler->addException($vid, $url, $e);            
+        }
 
         $blogCount = $decoded->total_count;
 
@@ -55,11 +66,19 @@ class BlogHandler {
 
 
         $url = 'https://api.hubapi.com/content/api/v2/blog-posts/' . $postId . '?hapikey=' . getenv('HS_APIKEY');
-
-
-
-        $decoded = json_decode($this->hsConnect->getResponse($url));
-
+        
+        try{
+            $decoded = json_decode($this->hsConnect->getResponse($url));
+            
+        }
+          
+        catch (Exception $e)
+        {
+            require_once 'exceptionHandler.php';
+            
+            $exHandler = new ExceptionHandler();
+            $exHandler->addException($vid, $url, $e);            
+        }
 
         $blogPost = array(
             "author" => $decoded->author_name,

@@ -11,10 +11,26 @@ $success = false;
 if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
 
-    //Här kopplar koden upp sig mot databasen för att kontrollera så användaren finns
-    require_once("dbConnection.php");
-    $db = new dbConnection();
-    $con = $db->connect();
+        //Här kopplar koden upp sig mot databasen för att kontrollera så användaren finns
+        require_once("dbConnection.php");
+        $db = new dbConnection();
+
+       
+
+        try {
+            $con = $db->connect();
+            
+             if ($con->connect_error) {
+            throw new Exception("Connection failed: " . $con->connect_error);
+        }
+        
+        } catch (Exception $e) {
+            require_once 'exceptionHandler.php';
+
+            $exHandler = new ExceptionHandler();
+            $exHandler->addException($vid, $url, $e);
+        }
+
 
     if ($con->connect_error) {
         echo "Connection failed: " . $con->connect_error;
@@ -23,7 +39,15 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $sql = "SELECT EMAIL FROM USER WHERE EMAIL LIKE '" . $email . "' AND PASSWORD LIKE '" . $password . "'";
 
 
-    $result = $con->query($sql);
+        $result = $con->query($sql);
+
+
+
+
+        if ($result->num_rows == 1) {
+            $success = true;
+        } else {
+
 
 
 
@@ -55,10 +79,19 @@ if ($success == true) {
 
     $connect = new ProfileHandler();
 
-    $profile = $connect->getProfileId($email);
+
+    try {
+        $profile = $connect->getProfileId($email);
+    } catch (Exception $e) {
+        require_once 'exceptionHandler.php';
+
+
+        $exHandler = new ExceptionHandler();
+        $exHandler->addException($vid, $url, $e);
+    }
+
 
     setcookie("loggedIn", $profile['vid']);
-
 
 
     header('Location: index.php');
@@ -66,5 +99,6 @@ if ($success == true) {
     header('Location: index.php');
     session_start();
     $_SESSION['loginError'] = "Felaktig email eller lösenord.";
+
 }
 ?>
