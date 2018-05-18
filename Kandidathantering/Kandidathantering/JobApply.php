@@ -1,4 +1,10 @@
+
 <?php
+/**
+ * Dessa funktioner används för att hantera jobbansökningar. När en användare söker
+ * jobb så registreras detta i både den lokala databasen (StrategDB) och det registreras
+ * även på användares profil i HubSpot, vilket gör att rekryteraren får en notis därigenom.
+ */
 
 if (isset($_POST['vid']) && isset($_POST['jobId'])) {
     apply($_POST['vid'], $_POST['jobId']);
@@ -32,6 +38,14 @@ function sendQuery($query) {
     return $result;
 }
 
+
+/**
+ * Denna funktion kontrollerar om användaren redan har sökt tjänsten i fråga
+ * 
+ * @param type $vid = användarens ID
+ * @param type $jobId = tjänstens ID
+ * @return boolean = true om tjänsten finns i databasen, annars false.
+ */
 function hasApplied($vid, $jobId) {
     $query = "SELECT * FROM JOBAPPLY WHERE USERID = " . $vid . " AND JOBPOSTID = " . $jobId;
 
@@ -51,6 +65,15 @@ function hasApplied($vid, $jobId) {
         return false;
     }
 }
+
+/**
+ * Denna funktion används för att registrera att en användare sökt en tjänst.
+ * Funktionen registrerar användarens ID och tjänstens ID i StrategDB och 
+ * skapar även en "Task" i Hubspot som notifierar rekryteraren.
+ * 
+ * @param type $vid
+ * @param type $jobId
+ */
 
 function apply($vid, $jobId) {
 

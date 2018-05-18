@@ -9,6 +9,12 @@ $dotenv->load();
 
 require_once 'dbConnection.php';
 
+/**
+ * Klass som används för att hantera undantag. Undantagen lagras i databasen
+ * för att enkelt logga fel som uppstått, och användaren dirigeras till en
+ * sida med ett felmeddelande.
+ */
+
 class ExceptionHandler {
 
     protected $dbConnect;

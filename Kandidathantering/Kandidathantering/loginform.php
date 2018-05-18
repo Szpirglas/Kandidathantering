@@ -15,9 +15,11 @@ if(strpos(strtolower(basename($_SERVER['REQUEST_URI'])), "loginform.php") !== fa
     </head>
     <body>
         <h1>LOGGA IN</h1>
+
         <div class="loginForm"><form action="login.php" method="post">
                 <?php
                 echo '<p class="errors">' . $_SESSION['loginError'] . '</p>';
+
                 ?>
                 E-mail: <br>
                 <input type="text" name="email"><br><br>

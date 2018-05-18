@@ -9,6 +9,9 @@ $dotenv->load();
 
 require_once 'hsConnection.php';
 
+/**
+ * Klass som används för att hantera användare och dess profiler.
+ */
 class ProfileHandler {
 
     protected $hsConnect;
@@ -17,6 +20,14 @@ class ProfileHandler {
         $this->hsConnect = new hsConnection();
     }
 
+    /**
+     * Används främst vid inloggning för att hämta ut en användares ID med hjälp
+     * av dess epost-adress. Returnerar ID tillsammans med förnamn och efternamn.
+     * 
+     * @param type $email
+     * @return type
+     * 
+     */
     function getProfileId($email) {
 
         $url = 'https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey=' . getenv('HS_APIKEY');
@@ -39,6 +50,12 @@ class ProfileHandler {
         return $profile;
     }
 
+    /**
+     * Hämtar mer utökad profilinformation med hjälp av användarens ID.
+     * 
+     * @param type $vid
+     * @return type
+     */
     function getProfile($vid) {
 
         $url = 'https://api.hubapi.com/contacts/v1/contact/vid/' . $vid . '/profile?hapikey=' . getenv('HS_APIKEY');
@@ -127,66 +144,6 @@ class ProfileHandler {
 
         try {
             $this->hsConnect->sendToHubSpot($url, $profileEncoded);
-        } catch (Exception $e) {
-            require_once 'exceptionHandler.php';
-
-            $exHandler = new ExceptionHandler();
-            $exHandler->addException($vid, $url, $e);
-        }
-    }
-
-    function updateProfile($email, $firstname, $lastname, $interest) {
-        $profile = array(
-            'properties' => array(
-                array(
-                    'property' => 'email',
-                    'value' => $email
-                ),
-                array(
-                    'property' => 'firstname',
-                    'value' => $firstname
-                ),
-                array(
-                    'property' => 'lastname',
-                    'value' => $lastname),
-                array(
-                    'property' => 'intresse',
-                    'value' => $interest
-        )));
-        $profileEncoded = json_encode($profile);
-
-        $url = 'https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey=' . getenv('HS_APIKEY');
-
-        try {
-            $this->hsConnect->sendToHubSpot($url, $profileEncoded);
-        } catch (Exception $e) {
-            require_once 'exceptionHandler.php';
-
-            $exHandler = new ExceptionHandler();
-            $exHandler->addException($vid, $url, $e);
-        }
-    }
-
-    function subscribeNewsletter($email, $frequency) {
-        $decoded = json_decode($this->getResponse('https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey=' . getenv('HS_APIKEY')));
-
-        $vid = array(
-            "vid" => $decoded->vid
-        );
-
-        $subcription = array(
-            array(
-                'property' => 'blog_kandidat_5623197993_subscription',
-                'value' => $frequency
-            )
-        );
-
-        $subscriptionEncoded = json_encode($subcription);
-        $url = 'https://api.hubapi.com/contacts/v1/contact/vid/' . $vid . '/profile?hapikey=' . getenv('HS_APIKEY');
-
-
-        try {
-            $this->hsConnect->sendToHubSpot($url, $subscriptionEncoded);
         } catch (Exception $e) {
             require_once 'exceptionHandler.php';
 

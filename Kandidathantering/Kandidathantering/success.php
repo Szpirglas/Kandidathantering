@@ -21,12 +21,15 @@ if(strpos(strtolower(basename($_SERVER['REQUEST_URI'])), "success.php") !== fals
         echo "<h2>" . $_SESSION['user']['firstname'] . " " . $_SESSION['user']['lastname'] . "!</h2>";
         ?>
         </br>
+
         <img class="strategWhite" src="content/bilder/Strateg_liggande-VIT_utan_text.png" alt="strateg"/>
         </br>
         <form action="updateprofileform.php">
+
             <input class="button button-black" type="submit" value="Redigera profil" />
         </form>
         </br>
+
         <?php 
         //Om användare ej lagt till CV eller personligt brev, uppmana att göra det
         if (strlen($_SESSION['user']['cv']) < 5 || strlen($_SESSION['user']['personligt_brev']) < 5)

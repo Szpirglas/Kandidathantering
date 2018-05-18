@@ -29,23 +29,19 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $exHandler = new ExceptionHandler();
         $exHandler->addException($vid, $url, $e);
     }
-
-
-    if ($con->connect_error) {
-        echo "Connection failed: " . $con->connect_error;
-    }
+  
 
     $sql = "SELECT EMAIL FROM USER WHERE EMAIL LIKE '" . $email . "' AND PASSWORD LIKE '" . $password . "'";
+
 
 
     $result = $con->query($sql);
 
 
-
-
     if ($result->num_rows == 1) {
         $success = true;
     } else {
+
 
 
 
@@ -65,38 +61,34 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
     }
 
 
+}
+
 
     /* Anledningen till att if/else-satsen ovan använder sig av en bool istället för att
       köra nedanstående kod direkt, är för att det fick cookie-skapandet att krångla, och
       och cookien lagrades inte rätt. Att flytta ner koden hit löste problemet, varför vet vi inte
       men funkar det så funkar det! :) */
-}
+
+
+
+   
 if ($success == true) {
 
 
-    require_once 'profileHandler.php';
+        require_once 'profileHandler.php';
 
-    $connect = new ProfileHandler();
-
-
-    try {
-        $profile = $connect->getProfileId($email);
-    } catch (Exception $e) {
-        require_once 'exceptionHandler.php';
+        $connect = new ProfileHandler();
+  
+            $profile = $connect->getProfileId($email);
+ 
+        setcookie("loggedIn", $profile['vid']);
 
 
-        $exHandler = new ExceptionHandler();
-        $exHandler->addException($vid, $url, $e);
+        header('Location: index.php');
+    } else {
+        header('Location: index.php');
+        session_start();
+        $_SESSION['loginError'] = "Felaktig email eller lösenord.";
     }
 
-
-    setcookie("loggedIn", $profile['vid']);
-
-
-    header('Location: index.php');
-} else {
-    header('Location: index.php');
-    session_start();
-    $_SESSION['loginError'] = "Felaktig email eller lösenord.";
-}
 ?>

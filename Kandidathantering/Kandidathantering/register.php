@@ -33,12 +33,6 @@ if ($regPassword != $regConfirmPwd) {
     array_push($errors, "Lösenord matchar ej.");
 }
 
-//if (filter_var($regEmail, FILTER_VALIDATE_EMAIL) AND
-//        $regPassword != null AND
-//        $regFirstName != null AND
-//        $regLastName != null AND
-//        $regConfirmPwd != null AND
-//        $regPassword == $regConfirmPwd) {
 if (empty($errors)) {
 $_SESSION['errors'] = $errors;
 
@@ -98,12 +92,12 @@ $_SESSION['errors'] = $errors;
     }
 } else {
 
-    //Manuell felhantering, kommer inte finnas kvar i framtiden :)
+
     $_SESSION['errors'] = $errors;
     $_SESSION['user']['firstname'] = $regFirstName;
     $_SESSION['user']['lastname'] = $regLastName;
     $_SESSION['user']['email'] = $regEmail;
     header('Location: registerform.php');
-//    echo 'ERROR INRE!';
+
 }
 

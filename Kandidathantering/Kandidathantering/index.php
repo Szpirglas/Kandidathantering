@@ -4,13 +4,17 @@ if (!isset($_COOKIE["loggedIn"])) {
     session_start();
     $_SESSION['user'] = array();
     $_SESSION['errors'] = array();
+
     // För att unvika konflikt om loginError ej är deklarerad
+
     if (empty($_SESSION['loginError'])) {
         $_SESSION['loginError'] = "";
     }
 } else {
+
     // Om inloggad fyll cookies
     require_once 'profileHandler.php';
+
     $connect = new ProfileHandler();
     $profile = $connect->getProfile($_COOKIE['loggedIn']);
     session_start();
@@ -78,11 +82,13 @@ if (!isset($_COOKIE["loggedIn"])) {
 
         <section class="jobs">
             <?php
+
             require_once("blogHandler.php");
             $api = new BlogHandler();
             $jobs = $api->getBlog(getenv('HSBLOG_JOBS'));
             foreach ($jobs as $job) {
                 // Jobb-ruta
+
                 echo("<div class='jobContainer'>" .
                 "<div class='jobWrapper'>" .
                 "<a href='job.php?" . $job['id'] . "'>" .
@@ -90,6 +96,7 @@ if (!isset($_COOKIE["loggedIn"])) {
                 "<img class='jobListingImage' src='" . $job['image'] . "' alt='" . $job['title'] . "'/>" .
                 "</div>" .
                 "</a>" .
+
                 "<a href='job.php?" . $job['id'] . "'>" .
                 "<div class='jobTitleButton button button-white'>" . $job['title'] . "</div>" .
                 "</a>" .
@@ -109,6 +116,7 @@ if (!isset($_COOKIE["loggedIn"])) {
             "</a>" .
             "</div>" .
             "</div>");
+
             ?>
         </section>
 
@@ -176,7 +184,9 @@ if (!isset($_COOKIE["loggedIn"])) {
 </html>
 
 <?php
+
 // Rensa loginError så att den inte sparas om användaren lämnar sidan och sedan kommer tillbaka
+
 if (!isset($_COOKIE["loggedIn"])) {
     $_SESSION['loginError'] = "";
 }

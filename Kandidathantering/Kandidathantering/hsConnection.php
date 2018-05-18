@@ -13,6 +13,13 @@ class hsConnection {
         
     }
 
+    /**
+     * Funktion som används för att skicka data till HubSpots API.
+     * 
+     * @param type $url
+     * @param type $json
+     * @throws Exception
+     */
 
     function sendToHubSpot($url, $json) {
         $ch = curl_init($url);
@@ -36,7 +43,7 @@ class hsConnection {
 
     /**
      * Funktion som använder cURL för att hämta data från ett specifikt API.
-     * 
+     *
      * @param type $url = URL till API'et
      * @return type $result = ett svar som är i JSON.
      */

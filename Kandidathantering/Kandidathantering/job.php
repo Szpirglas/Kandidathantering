@@ -34,6 +34,7 @@ and open the template in the editor.
             ?>
         </title>
         <link rel='shortcut icon' type='image/x-icon' href='content/favicon.ico' />
+
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="style.css">
@@ -52,6 +53,7 @@ and open the template in the editor.
         require_once("blogHandler.php");
         $api = new BlogHandler();
         $job = $api->getBlogPost($jobId);
+
 
         // Om parameter i url är korrekt visa jobb, annars visa ej jobb
         if (isset($job['title'])) {
@@ -88,6 +90,7 @@ and open the template in the editor.
         } else {
             echo "Detta jobb är inte tillgängligt.";
         }
+
         ?>
 
     </body>

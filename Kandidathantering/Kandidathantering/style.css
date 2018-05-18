@@ -1,3 +1,4 @@
+
 /* Global selectors
    ========================================================================== 
 */
@@ -13,6 +14,7 @@ body *{
     font-family: 'Arvo';
 }
 
+
 input:focus{
     outline: none;
 }
@@ -20,6 +22,7 @@ input:focus{
 section{
     margin-bottom: 20px;
 }
+
 
 input[type="text"], input[type="password"]{
     padding: 10px;
@@ -29,20 +32,12 @@ input[type="submit"]:hover, input[type="file"]:hover{
     cursor: pointer !important;
 }
 
-
-
-
-
-
-
-
-
-
 /* Reusable custom classes
    ========================================================================== 
 */
 .errors{
     color: red;
+
 }
 
 .button{
@@ -128,6 +123,11 @@ input[type="submit"]:hover, input[type="file"]:hover{
     text-align: center;
 }
 
+
+.strategWhite{
+
+}
+
 .profile{
     position: relative;
     float: left;
@@ -139,10 +139,12 @@ input[type="submit"]:hover, input[type="file"]:hover{
     padding-bottom: 20px;
 }
 
+
 .profile input { 
     width: 160px;
 
 }
+
 
 .profile input[type="text"], .profile input[type="password"]{
     background-color: black;
@@ -219,12 +221,14 @@ input[type="submit"]:hover, input[type="file"]:hover{
     position: absolute;
 }
 
+
 .latestBlogPost{
     float: left;
     width: 60%;
     background: whitesmoke;
     padding: 20px;
 }
+
 
 .imageGallery{
     width: 100%;
@@ -234,7 +238,10 @@ input[type="submit"]:hover, input[type="file"]:hover{
     width: calc(100%/3);
     position: relative;
     float: left;
+
 }
+
+
 
 
 
@@ -253,29 +260,22 @@ input[type="submit"]:hover, input[type="file"]:hover{
     margin: 0;
     margin: auto;
     width: 80%;
+
 }
 
 .blogPostTitle{}
 
 .blogPostPost{}
 
+
 .blogPostAuthor{
     font-style: italic;
 }
 
-
-
-
-
-
-
-
-
-
-
 /* Job page
    ========================================================================== 
 */
+
 .jobPostContainer{
     max-width: 700px;
     margin: auto;
@@ -309,22 +309,15 @@ input[type="submit"]:hover, input[type="file"]:hover{
     bottom: 0;
     max-width: 95%;
     max-height: 100%;
+
 }
 
 #jobSearch{
     text-align: center;
     margin-bottom: 10%;
     margin-top: 50px;
+
 }
-
-
-
-
-
-
-
-
-
 
 /* Message page
    ========================================================================== 
@@ -334,18 +327,10 @@ input[type="submit"]:hover, input[type="file"]:hover{
     max-width: 100%;
 }
 
-
-
-
-
-
-
-
-
-
 /* HubSpot form wrapper
    ========================================================================== 
 */
+
 .hsFormContainer{
     position: relative;
     margin:auto;
@@ -353,27 +338,22 @@ input[type="submit"]:hover, input[type="file"]:hover{
     width: 500px;
 /*    padding-right: 7%;*/
     margin-bottom: 50px;
+
 }
 
 .hbspt-form input[type="submit"]{
     padding: 20px !important;
+
 }
 
 .hsFormContainer h1{
     text-align: center;
 }
 
-
-
-
-
-
-
-
-
 /* Register page
    ========================================================================== 
 */
+
 .regForm h1{
     text-align: center;
 }
@@ -387,13 +367,6 @@ input[type="submit"]:hover, input[type="file"]:hover{
     max-width: 524px;
     margin-top: 20px;
 }
-
-
-
-
-
-
-
 
 
 /* Custom responsive design changes
@@ -465,6 +438,7 @@ input[type="submit"]:hover, input[type="file"]:hover{
     .blogPostContainer{
         padding:20px;
     }
+
 }
 
 @media(max-width: 600px) {
@@ -482,9 +456,11 @@ input[type="submit"]:hover, input[type="file"]:hover{
 
 
 
+
 /* All HubSpot Forms, classes to manipulate embedded HubSpot form
    ========================================================================== 
 */
+
 .hbspt-form {
     margin-top: 10%;
     text-align: left;
