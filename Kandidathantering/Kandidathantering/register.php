@@ -8,7 +8,7 @@ $regEmail = filter_input(INPUT_POST, 'email');
 $regPassword = filter_input(INPUT_POST, 'password');
 $regConfirmPwd = filter_input(INPUT_POST, 'confirmpwd');
 
-//Variablerna valideras
+//Variablerna valide
 
 $errors = array();
 if (!filter_var($regEmail, FILTER_VALIDATE_EMAIL)) {
@@ -32,7 +32,6 @@ if (!preg_match('/^\p{L}*$/', $regFirstName) || !preg_match('/^\p{L}*$/', $regFi
 if ($regPassword != $regConfirmPwd) {
     array_push($errors, "Lösenord matchar ej.");
 }
-
 
 if (empty($errors)) {
 $_SESSION['errors'] = $errors;
@@ -93,7 +92,7 @@ $_SESSION['errors'] = $errors;
     }
 } else {
 
-  
+
     $_SESSION['errors'] = $errors;
     $_SESSION['user']['firstname'] = $regFirstName;
     $_SESSION['user']['lastname'] = $regLastName;

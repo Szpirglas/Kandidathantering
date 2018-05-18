@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Strateg - Blogg</title>
+        <link rel='shortcut icon' type='image/x-icon' href='content/favicon.ico' />
         <link rel="stylesheet" type="text/css" href="style.css">
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Arvo">
     </head>
@@ -12,7 +14,7 @@
             </a>
         </div>
         <?php
-
+        //Hämta och visa alla blogginlogg från HR-bloggen
         function getBlogPosts() {
             require_once("blogHandler.php");
 

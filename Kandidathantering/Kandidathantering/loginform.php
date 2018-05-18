@@ -2,9 +2,10 @@
 
 
 <?php
-/* Om användaren har en cookie lagrad på sin dator så omdirigeras hen automatiskt
- * till sidan för inloggade */
-
+// Skicka tillbaka till huvudsidan om användaren försöker besöka sidan enskilt
+if(strpos(strtolower(basename($_SERVER['REQUEST_URI'])), "loginform.php") !== false) {
+    header("Location: index.php");
+}
 ?>
 <html>
     <head>
@@ -15,10 +16,10 @@
     <body>
         <h1>LOGGA IN</h1>
 
-
         <div class="loginForm"><form action="login.php" method="post">
                 <?php
-                    echo '<p class="errors">' . $_SESSION['loginError'] . '</p>';
+                echo '<p class="errors">' . $_SESSION['loginError'] . '</p>';
+
                 ?>
                 E-mail: <br>
                 <input type="text" name="email"><br><br>
@@ -29,10 +30,7 @@
                 <br>
                 <br>
                 <a href="registerform.php">Registrera dig här!</a>
-
-
-
-            </form></div>
-
+            </form>
+        </div>
     </body>
 </html>

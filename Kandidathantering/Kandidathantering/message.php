@@ -4,10 +4,14 @@ if (!isset($_COOKIE["loggedIn"])) {
 } else {
     session_start();
 }
+
+
 ?>
 
 <html>
     <head>
+        <title>Strateg - Meddelande</title>
+        <link rel='shortcut icon' type='image/x-icon' href='content/favicon.ico' />
         <link rel="stylesheet" type="text/css" href="style.css">
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Arvo">
         <script

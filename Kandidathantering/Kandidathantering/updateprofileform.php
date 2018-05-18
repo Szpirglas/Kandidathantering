@@ -1,13 +1,10 @@
 <?php
+
+//Uppdatera användasession
 require_once 'profileHandler.php';
-
-
 $connect = new ProfileHandler();
-
 $profile = $connect->getProfile($_COOKIE['loggedIn']);
-
 session_start();
-
 
 $_SESSION['user'] = $profile;
 ?>
@@ -16,8 +13,9 @@ $_SESSION['user'] = $profile;
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Strateg - Uppdatera</title>
+        <link rel='shortcut icon' type='image/x-icon' href='content/favicon.ico' />
         <meta charset="UTF-8">
-        <title></title>
         <link rel="stylesheet" type="text/css" href="style.css">
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Arvo">
         <script
@@ -49,6 +47,7 @@ $_SESSION['user'] = $profile;
                     portalId: "2896922",
                     formId: "479de400-f121-410c-8e10-fd2f4ba968a6",
                     css: "",
+//                    Fyll i fält med sparade uppgifter
                     onFormReady: function ($form) {
                         $('input[name="firstname"]').val(firstname).change();
                         $('input[name="lastname"]').val(lastname).change();

@@ -1,3 +1,9 @@
+<?php
+// Skicka tillbaka till huvudsidan om användaren försöker besöka sidan enskilt
+if(strpos(strtolower(basename($_SERVER['REQUEST_URI'])), "success.php") !== false) {
+    header("Location: index.php");
+}
+?>
 
 <html>
     <head>
@@ -11,19 +17,13 @@
         
         
 //Presenterar för- och efternamn som hämtats från API'n och lagrats i cookien
-
         echo "<h1>Välkommen!</h1>";
         echo "<h2>" . $_SESSION['user']['firstname'] . " " . $_SESSION['user']['lastname'] . "!</h2>";
         ?>
-
-
-        <!--        <br>  <a href="logout.php">Log out!</a> <br>-->
         </br>
-<!--        <img class="strategBlack" src="content/bilder/Strateg_liggande-SVART_1.png" alt="strateg"/>-->
+
         <img class="strategWhite" src="content/bilder/Strateg_liggande-VIT_utan_text.png" alt="strateg"/>
         </br>
-
-
         <form action="updateprofileform.php">
 
             <input class="button button-black" type="submit" value="Redigera profil" />
@@ -31,11 +31,11 @@
         </br>
 
         <?php 
+        //Om användare ej lagt till CV eller personligt brev, uppmana att göra det
         if (strlen($_SESSION['user']['cv']) < 5 || strlen($_SESSION['user']['personligt_brev']) < 5)
         {
-        echo '<div id="cvWarning">GLÖM INTE ATT LÄGGA IN CV OCH PERSONLIGT BREV!</div>';
-            
-        echo '</br></br>';
+        echo '<div id="cvWarning">GLÖM INTE ATT LÄGGA IN CV OCH PERSONLIGT BREV!</div>';  
+        echo '</br>';
         }
         ?>
         

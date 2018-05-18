@@ -8,6 +8,8 @@ and open the template in the editor.
 -->
 <html>
     <head>
+        <title>Strateg - Registrera</title>
+        <link rel='shortcut icon' type='image/x-icon' href='content/favicon.ico' />
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css">
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Arvo">
@@ -24,18 +26,27 @@ and open the template in the editor.
             <form action="register.php" method="post">
                 Förnamn<br>
                 <input type="text" name="firstname" value="<?php
+
+                // Om användare försökt registrera men nekats så fylls fält i.
+
                 if (!empty($_SESSION['user']['firstname'])) {
                     echo $_SESSION['user']['firstname'];
                 }
                 ?>"><br>
                 Efternamn<br>
                 <input type="text" name="lastname" value="<?php
+
+                // Om användare försökt registrera men nekats så fylls fält i.
+
                 if (!empty($_SESSION['user']['lastname'])) {
                     echo $_SESSION['user']['lastname'];
                 }
                 ?>"><br>
                 E-mail <br>
                 <input type="text" name="email" value="<?php
+
+                // Om användare försökt registrera men nekats så fylls fält i.
+
                 if (!empty($_SESSION['user']['email'])) {
                     echo $_SESSION['user']['email'];
                 }

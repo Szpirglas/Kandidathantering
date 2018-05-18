@@ -41,12 +41,15 @@ class TaskHandler {
         $taskBody = $applicantName . ' har sökt jobb: ' . $jobName;
         $taskSubject = 'Jobbansökan: ' . $applicantName;
         
+        // Simons ownerId inte vid
+        $owner = 31147716;
+        
        
         
         $task = array(
             'engagement' => array(
                 'active' => true,
-                'ownerId' => null,
+                'ownerId' => $owner,
                 'type' => 'TASK',
                 
             ),

@@ -29,18 +29,14 @@ class BlogHandler {
 
 
         $url = 'https://api.hubapi.com/content/api/v2/blog-posts?hapikey=' . getenv('HS_APIKEY') . '&content_group_id=' . $blogId;
-        
-        try
-        {
-        $decoded = json_decode($this->hsConnect->getResponse($url));
-        }
-          
-        catch (Exception $e)
-        {
+
+        try {
+            $decoded = json_decode($this->hsConnect->getResponse($url));
+        } catch (Exception $e) {
             require_once 'exceptionHandler.php';
-            
+
             $exHandler = new ExceptionHandler();
-            $exHandler->addException($vid, $url, $e);            
+            $exHandler->addException($vid, $url, $e);
         }
 
         $blogCount = $decoded->total_count;
@@ -67,34 +63,28 @@ class BlogHandler {
     }
 
     function getBlogPost($postId) {
-
-
-
-
         $url = 'https://api.hubapi.com/content/api/v2/blog-posts/' . $postId . '?hapikey=' . getenv('HS_APIKEY');
-        
-        try{
+
+        try {
             $decoded = json_decode($this->hsConnect->getResponse($url));
-            
-        }
-          
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
             require_once 'exceptionHandler.php';
-            
+
             $exHandler = new ExceptionHandler();
-            $exHandler->addException($vid, $url, $e);            
+            $exHandler->addException($vid, $url, $e);
         }
+        //Hämta endast jobb om parameter är id:t är giltigt
+        if (!isset($decoded->status)) {
+            $blogPost = array(
+                "author" => $decoded->author_name,
+                "author_email" => $decoded->author_email,
+                "title" => $decoded->title,
+                "body" => $decoded->post_body,
+                "image" => $decoded->featured_image
+            );
 
-        $blogPost = array(
-            "author" => $decoded->author_name,
-            "author_email" => $decoded->author_email,
-            "title" => $decoded->title,
-            "body" => $decoded->post_body,
-            "image" => $decoded->featured_image
-        );
-
-        return $blogPost;
+            return $blogPost;
+        }
     }
 
 }

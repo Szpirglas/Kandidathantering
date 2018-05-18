@@ -29,23 +29,19 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $exHandler = new ExceptionHandler();
         $exHandler->addException($vid, $url, $e);
     }
-
-
-    if ($con->connect_error) {
-        echo "Connection failed: " . $con->connect_error;
-    }
+  
 
     $sql = "SELECT EMAIL FROM USER WHERE EMAIL LIKE '" . $email . "' AND PASSWORD LIKE '" . $password . "'";
+
 
 
     $result = $con->query($sql);
 
 
-
-
     if ($result->num_rows == 1) {
         $success = true;
     } else {
+
 
 
 
@@ -64,7 +60,9 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $con->close();
     }
 
+
 }
+
 
     /* Anledningen till att if/else-satsen ovan använder sig av en bool istället för att
       köra nedanstående kod direkt, är för att det fick cookie-skapandet att krångla, och
@@ -72,7 +70,9 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
       men funkar det så funkar det! :) */
 
 
-    if ($success == true) {
+
+   
+if ($success == true) {
 
 
         require_once 'profileHandler.php';
@@ -90,4 +90,5 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         session_start();
         $_SESSION['loginError'] = "Felaktig email eller lösenord.";
     }
+
 ?>
