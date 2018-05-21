@@ -38,7 +38,7 @@ $_SESSION['errors'] = $errors;
 
     //Uppkoppling och insert i databasen
 
-    require_once("dbConnection.php");
+    require_once __DIR__ . '/../connections/dbConnection.php';
     
     $db = new dbConnection();
     
@@ -50,7 +50,7 @@ $_SESSION['errors'] = $errors;
         }
         
         } catch (Exception $e) {
-            require_once 'exceptionHandler.php';
+            require_once __DIR__ . '/../handlers/exceptionHandler.php';
 
             $exHandler = new ExceptionHandler();
             $exHandler->addException($vid, $url, $e);
@@ -66,7 +66,7 @@ $_SESSION['errors'] = $errors;
 
         if ($con->query($sql) === true) {
 
-            require_once 'ProfileHandler.php';
+            require_once __DIR__ . '/../handlers/ProfileHandler.php';
             $send = new ProfileHandler();
 
             $send->createProfile($regFirstName, $regLastName, $regEmail);
@@ -75,19 +75,19 @@ $_SESSION['errors'] = $errors;
 
 
 
-            header('Location: index.php');
+            header('Location: ../index.php');
         } else {
             echo "Error: " . $sql . "<br>" . $con->error;
 
             $con->close();
 //            $_SESSION['errors'] = $errors;
-            header('Location: registerform.php');
+            header('Location: ../registerform.php');
        }
     } else {
 
 
         $con->close();
-        header('Location: index.php');
+        header('Location: ../index.php');
         
     }
 } else {

@@ -23,7 +23,7 @@ and open the template in the editor.
         </div>
         <div class="regForm hsFormContainer">
             <h1>Registrera</h1>
-            <form action="register.php" method="post">
+            <form action="logic/register.php" method="post">
                 Förnamn<br>
                 <input type="text" name="firstname" value="<?php
 

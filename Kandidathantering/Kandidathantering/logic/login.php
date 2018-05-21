@@ -12,7 +12,7 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
 
     //Här kopplar koden upp sig mot databasen för att kontrollera så användaren finns
-    require_once("dbConnection.php");
+    require_once __DIR__ . '/../connections/dbConnection.php';
     $db = new dbConnection();
 
 
@@ -24,7 +24,7 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new Exception("Connection failed: " . $con->connect_error);
         }
     } catch (Exception $e) {
-        require_once 'exceptionHandler.php';
+        require_once __DIR__ . '/../handlers/exceptionHandler.php';
 
         $exHandler = new ExceptionHandler();
         $exHandler->addException($vid, $url, $e);
@@ -75,20 +75,30 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
 if ($success == true) {
 
 
-        require_once 'profileHandler.php';
+        require_once __DIR__ . '/../handlers/profileHandler.php';
 
         $connect = new ProfileHandler();
   
-            $profile = $connect->getProfileId($email);
+        $profile = $connect->getProfileId($email);
+        
+        
  
-        setcookie("loggedIn", $profile['vid']);
+        setcookie("loggedIn", $profile['vid'], time() + 3600, '/');
+       
+       
 
 
-        header('Location: index.php');
+     header('Location: ../index.php');
+        
+       
+        
+      
+       
     } else {
-        header('Location: index.php');
+        
         session_start();
         $_SESSION['loginError'] = "Felaktig email eller lösenord.";
+         header('Location: ../index.php');
     }
 
 ?>

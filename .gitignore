@@ -18,3 +18,5 @@ Kandidathantering/Kandidathantering/nbproject/private/private.properties
 *.xml
 Kandidathantering/Kandidathantering/nbproject/private/private.xml
 *.xml
+*.properties
+*.xml

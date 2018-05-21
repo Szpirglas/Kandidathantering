@@ -1,13 +1,12 @@
 <?php
 
 // Hämta .env-filen
+require __DIR__ . '/../vendor/autoload.php';
 
-require __DIR__ . '/vendor/autoload.php';
-
-$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv = new Dotenv\Dotenv(__DIR__ . "/../");
 $dotenv->load();
 
-require_once 'hsConnection.php';
+require_once __DIR__ . '/../connections/hsConnection.php';
 
 /**
  * Klass som används för att hantera användare och dess profiler.
@@ -32,6 +31,8 @@ class ProfileHandler {
 
         $url = 'https://api.hubapi.com/contacts/v1/contact/email/' . $email . '/profile?hapikey=' . getenv('HS_APIKEY');
 
+        
+        
         try {
             $decoded = json_decode($this->hsConnect->getResponse($url));
         } catch (Exception $e) {
@@ -40,12 +41,19 @@ class ProfileHandler {
             $exHandler = new ExceptionHandler();
             $exHandler->addException($vid, $url, $e);
         }
+        
+        
+     
 
         $profile = array(
+            
             "vid" => $decoded->vid,
-            "firstname" => $decoded->firstname,
-            "lastname" => $decoded->lastname
+            "firstname" => $decoded->properties->firstname->value,
+            "lastname" => $decoded->properties->lastname->value
+          
         );
+        
+        
 
         return $profile;
     }

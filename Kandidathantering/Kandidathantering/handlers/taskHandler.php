@@ -3,14 +3,10 @@
 
 
 // Hämta .env-filen
+require __DIR__ . '/../vendor/autoload.php';
 
-require __DIR__ . '/vendor/autoload.php';
-
-$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv = new Dotenv\Dotenv(__DIR__ . "/../");
 $dotenv->load();
-
-require_once 'hsConnection.php';
-require_once 'profileHandler.php';
 
 /**
  * Denna klassen används för att skapa Tasks i Hubspot via dess API

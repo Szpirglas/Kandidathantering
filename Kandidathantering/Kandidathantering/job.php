@@ -1,13 +1,13 @@
 <?php
 //Om query saknar siffror
 if (preg_match('~[0-9]~', basename($_SERVER['REQUEST_URI'])) == 0) {
-    header("Location: index.php");
+    header("url: index.php");
 }
 
 
 // Om ingen query finns
 if (!isset($_SERVER['QUERY_STRING'])) {
-    header("Location: index.php");
+    header("url: index.php");
 }
 session_start();
 ?>
@@ -26,7 +26,7 @@ and open the template in the editor.
 
 
 
-            require_once("blogHandler.php");
+            require_once 'handlers/blogHandler.php';
             $api = new BlogHandler();
             $job = $api->getBlogPost($jobId);
 // Titel på besökt arbetsannons
@@ -50,7 +50,7 @@ and open the template in the editor.
         </div>
         <?php
         $jobId = $_SERVER['QUERY_STRING'];
-        require_once("blogHandler.php");
+        require_once 'handlers/blogHandler.php';
         $api = new BlogHandler();
         $job = $api->getBlogPost($jobId);
 
@@ -68,7 +68,7 @@ and open the template in the editor.
             "</div>");
 
 
-            require_once 'JobApply.php';
+            require_once 'logic/jobApply.php';
 
 
             echo '<div id="jobSearch">';
@@ -102,7 +102,7 @@ and open the template in the editor.
 
             $.ajax({
                 type: "POST",
-                url: "JobApply.php",
+                url: "logic/jobApply.php",
                 data: {vid: <?php echo $_SESSION['user']['vid'] ?>,
                     jobId: <?php echo $_SERVER['QUERY_STRING'] ?>}
             }).done(function () {

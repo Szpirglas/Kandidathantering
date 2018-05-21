@@ -4,6 +4,7 @@ if (!isset($_COOKIE["loggedIn"])) {
     session_start();
     $_SESSION['user'] = array();
     $_SESSION['errors'] = array();
+    
 
     // För att unvika konflikt om loginError ej är deklarerad
 
@@ -12,8 +13,9 @@ if (!isset($_COOKIE["loggedIn"])) {
     }
 } else {
 
+    
     // Om inloggad fyll cookies
-    require_once 'profileHandler.php';
+    require_once 'handlers/profileHandler.php';
 
     $connect = new ProfileHandler();
     $profile = $connect->getProfile($_COOKIE['loggedIn']);
@@ -83,7 +85,7 @@ if (!isset($_COOKIE["loggedIn"])) {
         <section class="jobs">
             <?php
 
-            require_once("blogHandler.php");
+            require_once 'handlers/blogHandler.php';
             $api = new BlogHandler();
             $jobs = $api->getBlog(getenv('HSBLOG_JOBS'));
             foreach ($jobs as $job) {
@@ -127,7 +129,7 @@ if (!isset($_COOKIE["loggedIn"])) {
 
 //Hämta och visa senaste blogginlägget
                 function getBlogPosts() {
-                    require_once("blogHandler.php");
+                    require_once 'handlers/blogHandler.php';
                     $api = new BlogHandler();
                     $blogPosts = $api->getBlog(getenv('HSBLOG_NEWS'));
                     foreach ($blogPosts as $blogPost) {
@@ -146,7 +148,7 @@ if (!isset($_COOKIE["loggedIn"])) {
                 ?>
             </div>
             <div class="viewBlog">
-                <form class="viewBlogBtn" action="Blog.php">
+                <form class="viewBlogBtn" action="blog.php">
                     <input class="button button-black" type="submit" value="Se hela bloggen" />
                 </form>
             </div>

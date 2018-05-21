@@ -1,7 +1,7 @@
 <?php
 
 //Uppdatera användasession
-require_once 'profileHandler.php';
+require_once 'handlers/profileHandler.php';
 $connect = new ProfileHandler();
 $profile = $connect->getProfile($_COOKIE['loggedIn']);
 session_start();

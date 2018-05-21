@@ -39,7 +39,7 @@ if(strpos(strtolower(basename($_SERVER['REQUEST_URI'])), "success.php") !== fals
         }
         ?>
         
-        <form action="logout.php">
+        <form action="logic/logout.php">
             <input class="button button-black" type="submit" value="Logga ut" />
         </form>
 

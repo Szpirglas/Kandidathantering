@@ -2,12 +2,13 @@
 
 // Hämta .env-filen
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
-$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv = new Dotenv\Dotenv(__DIR__ . "/../");
 $dotenv->load();
 
-require_once 'hsConnection.php';
+
+require_once __DIR__ . '/../connections/hsConnection.php';
 
 /**
  * Klass med två funktioner som används för att hämta en utvald blogg med alla inlägg, samt hämta

@@ -5,6 +5,7 @@
 // Skicka tillbaka till huvudsidan om användaren försöker besöka sidan enskilt
 if(strpos(strtolower(basename($_SERVER['REQUEST_URI'])), "loginform.php") !== false) {
     header("Location: index.php");
+    
 }
 ?>
 <html>
@@ -16,9 +17,11 @@ if(strpos(strtolower(basename($_SERVER['REQUEST_URI'])), "loginform.php") !== fa
     <body>
         <h1>LOGGA IN</h1>
 
-        <div class="loginForm"><form action="login.php" method="post">
+        <div class="loginForm"><form action="logic/login.php" method="post">
                 <?php
                 echo '<p class="errors">' . $_SESSION['loginError'] . '</p>';
+                
+                
 
                 ?>
                 E-mail: <br>

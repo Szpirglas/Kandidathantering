@@ -2,9 +2,10 @@
 
 // Hämta .env-filen
 
-require __DIR__ . '/vendor/autoload.php';
 
-$dotenv = new Dotenv\Dotenv(__DIR__);
+require __DIR__ . '/../vendor/autoload.php';
+
+$dotenv = new Dotenv\Dotenv(__DIR__ . "/../");
 $dotenv->load();
 
 

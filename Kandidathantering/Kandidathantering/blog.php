@@ -16,7 +16,8 @@
         <?php
         //Hämta och visa alla blogginlogg från HR-bloggen
         function getBlogPosts() {
-            require_once("blogHandler.php");
+            require_once("handlers/blogHandler.php");
+            
 
             $api = new BlogHandler();
 

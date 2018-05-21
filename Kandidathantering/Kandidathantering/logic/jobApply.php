@@ -12,7 +12,7 @@ if (isset($_POST['vid']) && isset($_POST['jobId'])) {
 
 function sendQuery($query) {
 
-    require_once 'dbConnection.php';
+    require_once __DIR__ . '/../connections/dbConnection.php';
 
     $db = new dbConnection();
 
@@ -52,7 +52,7 @@ function hasApplied($vid, $jobId) {
     try {
         $result = sendQuery($query);
     } catch (Exception $e) {
-        require_once 'exceptionHandler.php';
+        require_once __DIR__ . '/../handlers/exceptionHandler.php';
 
         $exHandler = new ExceptionHandler();
         $exHandler->addException($vid, $url, $e);
@@ -81,8 +81,8 @@ function apply($vid, $jobId) {
 
     $query = "INSERT INTO JOBAPPLY (USERID, JOBPOSTID, STATUS) VALUES ($vid, $jobId, 'Applied')";
 
-    require_once 'blogHandler.php';
-    require_once 'TaskHandler.php';
+    require_once __DIR__ . '/../handlers/blogHandler.php';
+    require_once __DIR__ . '/../handlers/taskHandler.php';
 
     $taskHandler = new TaskHandler();
 
@@ -98,7 +98,7 @@ function apply($vid, $jobId) {
     try {
         $result = sendQuery($query);
     } catch (Exception $e) {
-        require_once 'exceptionHandler.php';
+        require_once __DIR__ . '/../handlers/exceptionHandler.php';
 
         $exHandler = new ExceptionHandler();
         $exHandler->addException($vid, $url, $e);
