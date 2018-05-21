@@ -3,7 +3,7 @@
  * och innehållet i $_SESSION tas bort */
 
 session_start();
-setcookie('loggedIn', '', time() - 3600);
+setcookie('loggedIn', '', time() - 3600, '/');
 session_unset();
-header("Location: index.php");
+header("Location: ../index.php");
 ?>
